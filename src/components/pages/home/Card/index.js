@@ -9,9 +9,9 @@ const Card = () => {
       <Flex className="balance" align="flex-start" maxWidth="350px">
         <Flex justify="space-between">
           <Flex width="max-content">
-            <Bold color="#5b5551">Wallet: </Bold>
+            <Bold colorTheme="primary/dark">Wallet: </Bold>
             <Flex width="max-content" margin="0 0 0 10px">
-              <Small color="#867d76"> Virtal Card</Small>
+              <Small colorTheme="grey[300]"> Virtal Card</Small>
             </Flex>
           </Flex>
         </Flex>
@@ -21,31 +21,31 @@ const Card = () => {
             <img src={Image} alt="icon" />
           </Frame>
           <Flex margin="0px 0 0 10px" width=" max-content" className="amount">
-            <Header4 size="18px" color="#673a1e" bold>
+            <Header4 size="18px" colorTheme="primary/dark" bold>
               &#8358;10000
             </Header4>
           </Flex>
         </Flex>
 
         <Flex margin="5px 0 0 0" justify="space-between">
-          <Header4 color="#5b5551">0000</Header4>
-          <Header4 color="#5b5551">0000</Header4>
-          <Header4 color="#5b5551">0000</Header4>
-          <Header4 color="#5b5551">0000</Header4>
+          <Header4 colorTheme="primary/dark">0000</Header4>
+          <Header4 colorTheme="primary/dark">0000</Header4>
+          <Header4 colorTheme="primary/dark">0000</Header4>
+          <Header4 colorTheme="primary/dark">0000</Header4>
         </Flex>
 
         <Flex margin="10px 0 0 0" justify="flex-start">
           <Flex margin="0px 0 0 0" width=" max-content" className="amount">
-            <Small color="#5b5551"> 12/12</Small>
+            <Small colorTheme="primary/dark"> 12/12</Small>
           </Flex>
           <Flex margin="0px 0 0 50px" width=" max-content" className="amount">
-            <Small color="#5b5551"> 16/14</Small>
+            <Small colorTheme="primary/dark"> 16/14</Small>
           </Flex>
         </Flex>
 
         <Flex margin="10px 0 0 0" justify="space-between">
           <Flex margin="0px 0 0 0" width=" max-content" className="amount">
-            <Bold color="#673a1e">Anonymous</Bold>
+            <Bold colorTheme="primary/dark">Anonymous</Bold>
           </Flex>
           <Frame width="80px" height="40px" object="contain">
             <img src={Image2} alt="icon" />

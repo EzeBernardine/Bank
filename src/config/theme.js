@@ -12,6 +12,7 @@ const palette = {
     default: "#de8430",
     main: "#fcb716",
     light: "#146DD6",
+    dark: "#673a1e",
     contrastText: white,
   },
   error: {

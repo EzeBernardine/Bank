@@ -36,7 +36,7 @@ export const Section = styled.section`
   margin-top: 70px;
   > div {
     position: relative;
-    > div:last-child {
+    > .main {
       border-left: ${({ theme }) => "1px solid " + theme.palette.grey.line};
       > div {
         position: relative;
@@ -61,6 +61,7 @@ export const Section = styled.section`
     }
   }
 `;
+
 export const Nav = styled.nav`
   padding: ${({ theme }) => theme.spacing.xlarge + " " + theme.spacing.small};
   position: sticky;
@@ -74,6 +75,9 @@ export const Nav = styled.nav`
     padding: ${({ theme }) => theme.spacing.xxsmall};
     margin: ${({ theme }) => theme.spacing.large + " 0"};
     cursor: pointer;
+    :hover {
+      color: ${({ theme }) => theme.palette.grey[500]};
+    }
   }
   @media (max-width: 700px) {
     display: none;

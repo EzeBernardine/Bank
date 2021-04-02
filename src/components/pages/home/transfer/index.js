@@ -72,7 +72,7 @@ const Transfer = () => {
                     <ArrowDownIcon
                       width="15px"
                       height="15px"
-                      color=" #b2aabd"
+                      color="#b2aabd"
                     />
                     <ErrorMessage name="bank" component="div" />
                   </InputStyles>
@@ -109,23 +109,29 @@ const Transfer = () => {
                 ) : null}
 
                 {/* ------------------button section-------------- */}
-                <Flex className="btn" justify="flex-end" margin="23px 0 0 0">
-                  <button type="submit" padding="15px 30px" onClick={() => []}>
-                    <Flex>
-                      <Span
-                        lineHeight="15px"
-                        color={"#fff"}
-                        className="drawerText"
-                      >
-                        Transfer
-                      </Span>
+                {amount === true ? (
+                  <Flex className="btn" justify="flex-end" margin="23px 0 0 0">
+                    <button
+                      type="submit"
+                      padding="15px 30px"
+                      onClick={() => []}
+                    >
+                      <Flex>
+                        <Span
+                          lineHeight="15px"
+                          color={"#fff"}
+                          className="drawerText"
+                        >
+                          Transfer
+                        </Span>
 
-                      <Span lineHeight="15px" color={"#fff"}>
-                        <TransferIcon width="20px" height="20px" />
-                      </Span>
-                    </Flex>
-                  </button>
-                </Flex>
+                        <Span lineHeight="15px" colorTheme={"white"}>
+                          <TransferIcon width="20px" height="20px" />
+                        </Span>
+                      </Flex>
+                    </button>
+                  </Flex>
+                ) : null}
               </Grid>
             </Form>
           )}

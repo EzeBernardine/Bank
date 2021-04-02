@@ -1,10 +1,3 @@
-/*
- * component: Flex, Grid
- * author: Eze Bernardine May
- * Date: Feb 16th, 2021
- * Project name: NDI ULO
- */
-
 import styled from "styled-components";
 import { getSpacingFromTheme } from "../../../lib/factory.lib";
 
@@ -25,7 +18,7 @@ export const Flex = styled("div")`
   padding: ${({ padding, theme }) =>
     padding ? getSpacingFromTheme({ spacing: padding, theme }) : "0"};
   & > * {
-    min-width: 0;
+    min-width: ${({ minWidth }) => (minWidth ? minWidth : 0)};
   }
 `;
 

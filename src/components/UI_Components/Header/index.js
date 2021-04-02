@@ -12,14 +12,14 @@ const Header = () => {
   return (
     <Styles className="App">
       <Flex margin="0 0 0 0" justify="space-between" height="100%">
-        <Header4 color="#673a1e" bold>
+        <Header4 colorTheme="primary/dark" bold>
           Bank
         </Header4>
 
         <Flex height="100%" width="max-content" justify="flex-end">
           <Flex width="max-content" className="welcomeNote">
-            <Header5 color="#673a1e">Welcome</Header5>
-            <Span color="#2c2d2d">Anonymous</Span>
+            <Header5 colorTheme="primary/dark">Welcome</Header5>
+            <Span colorTheme="primary/dark">Anonymous</Span>
           </Flex>
 
           <Flex width="max-content" margin="0 0 0 10px" className="avatar">
@@ -45,7 +45,7 @@ const Header = () => {
 
           <Flex width="max-content" justify="flex-end" margin="0 0 0 25px">
             <button className="logout">
-              <LogoutIcon color="#918e8c" width="20px" height="20px" />
+              <LogoutIcon   width="20px" height="20px" />
             </button>
           </Flex>
         </Flex>

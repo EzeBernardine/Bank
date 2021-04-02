@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PaginatorStyles } from "./styles";
+import { PaginatorStyles, Paginator, ListItems } from "./styles";
 import { LessThanIcon, GreaterThanIcon } from "../../assest/svg";
 import { generateID } from "../../../lib/generateID";
 
@@ -103,32 +103,38 @@ class Pagination extends React.Component {
     const { radius, color, firstLast, prevNext } = this.props;
 
     return (
-      <PaginatorStyles radius={radius} color={color}>
-        <ul className="pagination">
+      <PaginatorStyles>
+        <Paginator radius={radius} color={color}>
           {firstLast && (
-            <li className={pager.currentPage === 1 ? "disabled" : ""}>
-              <span onClick={() => this.setPage(1)} >First</span>
-            </li>
+            <ListItems
+              radius={radius}
+              className={pager.currentPage === 1 ? "disabled" : ""}
+            >
+              <span onClick={() => this.setPage(1)}>First</span>
+            </ListItems>
           )}
           {prevNext && (
-            <li className={pager.currentPage === 1 ? "disabled" : ""}>
+            <ListItems
+              radius={radius}
+              className={pager.currentPage === 1 ? "disabled" : ""}
+            >
               <span onClick={() => this.setPage(pager.currentPage - 1)}>
-                {" "}
-                <GreaterThanIcon />{" "}
+                <GreaterThanIcon />
               </span>
-            </li>
+            </ListItems>
           )}
           {pager.pages.map((page, index) => (
-            <li
+            <ListItems
               onClick={() => this.setPage(page)}
               key={generateID(14)}
               className={pager.currentPage === page ? "active" : ""}
             >
               <span>{page}</span>
-            </li>
+            </ListItems>
           ))}
           {prevNext && (
-            <li
+            <ListItems
+              radius={radius}
               className={
                 pager.currentPage === pager.totalPages ? "disabled" : ""
               }
@@ -136,18 +142,19 @@ class Pagination extends React.Component {
               <span onClick={() => this.setPage(pager.currentPage + 1)}>
                 <LessThanIcon />
               </span>
-            </li>
+            </ListItems>
           )}
           {firstLast && (
-            <li
+            <ListItems
+              radius={radius}
               className={
                 pager.currentPage === pager.totalPages ? "disabled" : ""
               }
             >
               <span onClick={() => this.setPage(pager.totalPages)}>Last</span>
-            </li>
+            </ListItems>
           )}
-        </ul>
+        </Paginator>
       </PaginatorStyles>
     );
   }

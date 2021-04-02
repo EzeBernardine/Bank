@@ -127,6 +127,8 @@ export const getColorFromTheme = ({ colorTheme, theme }) => {
       ? theme.palette.primary.main //done
       : colorTheme === "primary/light"
       ? theme.palette.primary.light
+      : colorTheme === "primary/dark"
+      ? theme.palette.primary.dark
       : colorTheme === "grey[100]"
       ? theme.palette.grey[100]
       : colorTheme === "grey[200]"

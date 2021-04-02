@@ -39,7 +39,7 @@ const Home = () => {
             </ul>
           </Nav>
 
-          <Flex width="80%" padding="xlarge">
+          <Flex width="80%" padding="xlarge" className='main'>
             <TransactionDate>
               <Flex justify="flex-start" margin="0 0 70px 0">
                 <BalanceCard />

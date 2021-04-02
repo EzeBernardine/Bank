@@ -15,53 +15,53 @@ const ProfileCard = () => {
         </Flex>
 
         <Flex margin="0" flexDir="column" className="name-section">
-          <Header5 color="#673a1e" bold>
+          <Header5 colorTheme="black" bold>
             Anonoymous
           </Header5>
 
-          <Header5 color="#dda278"> Obinnna</Header5>
+          <Header5 colorTheme="primary/default"> Obinnna</Header5>
         </Flex>
 
         <Flex flexDir="column" className="location-details">
           <Grid flexDir="column" gap="0">
             <Flex
               justify="flex-start"
-              margin="5px 0"
+              margin="10px 0"
               align="baseline"
               flexWrap="nowrap"
             >
               <Flex width="1px" minWidth="15px">
-                <CityIcon width="15px" height="15px" color="#673a1e" />
+                <CityIcon width="15px" height="15px" colorTheme="black" />
               </Flex>
-              <Span color="#673a1e" align="start">
+              <Span colorTheme="primary/dark" align="start">
                 city
               </Span>
             </Flex>
 
             <Flex
               justify="flex-start"
-              margin="5px 0"
+              margin="10px 0"
               align="baseline"
               flexWrap="nowrap"
             >
               <Flex width="1px" minWidth="15px">
-                <PhoneIcon width="15px" height="15px" color="#673a1e" />
+                <PhoneIcon width="15px" height="15px" colorTheme="black" />
               </Flex>
-              <Span color="#673a1e" align="start">
+              <Span colorTheme="primary/dark" align="start">
                 08000000000
               </Span>
             </Flex>
 
             <Flex
               justify="flex-start"
-              margin="5px 0"
+              margin="10px 0"
               align="baseline"
               flexWrap="nowrap"
             >
               <Flex width="16px" minWidth="16px">
-                <LocationIcon width="16px" height="16px" color="#673a1e" />
+                <LocationIcon width="16px" height="16px" colorTheme="black" />
               </Flex>
-              <Span color="#673a1e" align="start">
+              <Span colorTheme="primary/dark" align="start">
                 Address
               </Span>
             </Flex>
