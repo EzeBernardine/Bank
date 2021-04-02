@@ -71,7 +71,7 @@ const Deposit = () => {
   const tableHead = ["Type", "Amount", "Status", "Date  ", "Recipient"];
   return (
     <Styles className="App">
-      <Flex margin="80px 0 30px 0" justify="flex-start">
+      <Flex margin="0 0 30px 0" justify="flex-start">
         <Flex margin="0 0 30px 0" justify="flex-start">
           <Header5 colorTheme="grey[500]" spacing=".4rem" bold>
             Transactions

@@ -38,7 +38,21 @@ export const Section = styled.section`
     position: relative;
     > div:last-child {
       border-left: ${({ theme }) => "1px solid " + theme.palette.grey.line};
+      > div {
+        position: relative;
+        &:not(:first-child):after {
+          position: absolute;
+          content: "";
+          height: 20px;
+          width: 20px;
+          background-color: ${({ theme }) => theme.palette.grey[100]};
+          border-radius: 50%;
+          left: -58px;
+          top: 0;
+        }
+      }
     }
+
     @media (max-width: 700px) {
       > div {
         width: 100%;

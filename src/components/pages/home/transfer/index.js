@@ -5,15 +5,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { ArrowDownIcon, TransferIcon } from "../../../assest/svg";
 import { InputStyles } from "../../../UI_Components/Input/styles";
+// import { useState } from "react";
 
 const Transfer = () => {
+  // const [amount] = useState(false);
+
   const validationSchema = yup.object().shape({
     amount: yup.number().required("Provide an amount"),
     accountnumber: yup.number().min(2).required("Provide valid account number"),
     bank: yup.string().min(2).required("Provide valid bank name"),
   });
   return (
-    <Styles className="App">
+    <Styles>
       <Flex justify="flex-start">
         <Flex margin="0 0 30px 0" justify="flex-start" warning>
           <Flex margin="0 0 30px 0" justify="flex-start">
@@ -41,35 +44,7 @@ const Transfer = () => {
             <Form>
               <Grid className="input-container" gap="18px">
                 <Flex className="input-wrap" justify="space-between">
-                  <label htmlFor="cardnumber">Amount</label>
-                  <InputStyles>
-                    <Field
-                      type="text"
-                      name="amount"
-                      placeholder="Amount"
-                      id="cardnumber"
-                      value={amount}
-                    />
-                    <ErrorMessage name="amount" component="div" />
-                  </InputStyles>
-                </Flex>
-
-                <Flex className="input-wrap" justify="space-between">
-                  <label htmlFor="accountnumber">Recepient Account </label>
-                  <InputStyles>
-                    <Field
-                      type="text"
-                      name="accountnumber"
-                      id="accountnumber"
-                      placeholder="Account Number"
-                      value={accountnumber}
-                    />
-                    <ErrorMessage name="accountnumber" component="div" />
-                  </InputStyles>
-                </Flex>
-
-                <Flex className="input-wrap" justify="space-between">
-                  <label htmlFor="bank">Select your service provider</label>
+                  <label htmlFor="bank">Select Bank</label>
                   <InputStyles>
                     <Field as="select" name="bank" id="bank" value={bank}>
                       <option defaultValue="">Select</option>
@@ -102,6 +77,36 @@ const Transfer = () => {
                     <ErrorMessage name="bank" component="div" />
                   </InputStyles>
                 </Flex>
+
+                <Flex className="input-wrap" justify="space-between">
+                  <label htmlFor="accountnumber">Recepient Account </label>
+                  <InputStyles>
+                    <Field
+                      type="text"
+                      name="accountnumber"
+                      id="accountnumber"
+                      placeholder="Account Number"
+                      value={accountnumber}
+                    />
+                    <ErrorMessage name="accountnumber" component="div" />
+                  </InputStyles>
+                </Flex>
+
+                {amount === true ? (
+                  <Flex className="input-wrap" justify="space-between">
+                    <label htmlFor="cardnumber">Amount</label>
+                    <InputStyles>
+                      <Field
+                        type="text"
+                        name="amount"
+                        placeholder="Amount"
+                        id="cardnumber"
+                        value={amount}
+                      />
+                      <ErrorMessage name="amount" component="div" />
+                    </InputStyles>
+                  </Flex>
+                ) : null}
 
                 {/* ------------------button section-------------- */}
                 <Flex className="btn" justify="flex-end" margin="23px 0 0 0">

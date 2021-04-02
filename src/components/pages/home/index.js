@@ -57,9 +57,9 @@ const Home = () => {
                     width="calc( 50% - 25px)"
                     miWidth="max-content"
                   >
-                    <Span color="#5b5551">Last Transfer</Span>
-                    <Span color="#5b5551">Last Deposit</Span>
-                    <Span color="#5b5551">Last Withdrawal</Span>
+                    <Span colorTheme="grey[400]">Last Transfer</Span>
+                    <Span colorTheme="grey[400]">Last Login</Span>
+                    <Span colorTheme="grey[400]">Last Withdrawal</Span>
                   </Flex>
                   <Flex
                     flexDir="column"
@@ -67,9 +67,9 @@ const Home = () => {
                     width="calc( 50% - 25px)"
                     margin="0 0 0 15px"
                   >
-                    <Span color="#5b5551"> 1-12-2021</Span>
-                    <Span color="#5b5551"> 1-12-2021</Span>
-                    <Span color="#5b5551"> 000000000</Span>
+                    <Span colorTheme="grey[400]"> 1-12-2021</Span>
+                    <Span colorTheme="grey[400]"> 1-12-2021</Span>
+                    <Span colorTheme="grey[400]"> 000000000</Span>
                   </Flex>
                 </Flex>
               </Flex>

@@ -93,13 +93,13 @@ const CustomTable = ({
           <OverFlowScrollBar className="container">
             <Table>
               <TableHead>
-                <TableRow>
+                <tr>
                   {tableHead.map((head, i) => (
                     <TableHeadData key={generateID(11)}>
                       {head.toUpperCase()}
                     </TableHeadData>
                   ))}
-                </TableRow>
+                </tr>
               </TableHead>
 
               <tbody>
@@ -132,7 +132,7 @@ const CustomTable = ({
 };
 
 CustomTable.propTypes = {
-  // tableBody: PropTypes.array.isRequired,
+  tableBody: PropTypes.array.isRequired,
   tableHead: PropTypes.array.isRequired,
   rowClick: PropTypes.func,
   rowHovColor: PropTypes.string,

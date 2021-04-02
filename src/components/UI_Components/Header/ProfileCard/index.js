@@ -16,7 +16,7 @@ const ProfileCard = () => {
 
         <Flex margin="0" flexDir="column" className="name-section">
           <Header5 color="#673a1e" bold>
-            Anonuymous
+            Anonoymous
           </Header5>
 
           <Header5 color="#dda278"> Obinnna</Header5>
