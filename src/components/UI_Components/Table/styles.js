@@ -9,7 +9,7 @@ export const CustomTableMain = styled.section`
   padding-bottom: ${({ paginator }) => !paginator && "20px"};
 `;
 
-export const TableData = styled.td`
+export const TableBodyData = styled.td`
   padding: 1.2rem 1.8rem;
   font-weight: 400;
   font-size: 14px;
@@ -95,7 +95,7 @@ export const TableRow = styled.tr`
     flex-direction: column;
   }
 `;
-export const TableHeadContent = styled.th`
+export const TableHeadData = styled.th`
   text-align: start;
   color: ${({ theme }) => (theme ? theme.palette.primary.default : "#033")};
   font-size: 16px;

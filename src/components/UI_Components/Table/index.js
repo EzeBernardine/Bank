@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
   CustomTableMain,
-  TableData,
+  TableBodyData,
   Paginator,
   Table,
   TableHead,
   TableRow,
-  TableHeadContent,
+  TableHeadData,
 } from "./styles";
 import { generateID } from "../../../lib/generateID";
 import PropTypes from "prop-types";
@@ -42,7 +42,7 @@ const CustomTable = ({
       <>
         <TableRow key={generateID(17)} onClick={() => handleOpenTable(index)}>
           {Object.values(__data).map((item, i) => (
-            <TableData
+            <TableBodyData
               head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
               className={
                 (Object.keys(data)[i] &&
@@ -53,7 +53,7 @@ const CustomTable = ({
               key={generateID(14)}
             >
               {item}
-            </TableData>
+            </TableBodyData>
           ))}
         </TableRow>
         <TableRow
@@ -65,7 +65,7 @@ const CustomTable = ({
           }}
         >
           {Object.values(__data).map((item, i) => (
-            <TableData
+            <TableBodyData
               head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
               className={
                 (Object.keys(data)[i] &&
@@ -76,7 +76,7 @@ const CustomTable = ({
               key={generateID(14)}
             >
               {item}___
-            </TableData>
+            </TableBodyData>
           ))}
         </TableRow>
       </>
@@ -95,9 +95,9 @@ const CustomTable = ({
               <TableHead>
                 <TableRow>
                   {tableHead.map((head, i) => (
-                    <TableHeadContent key={generateID(11)}>
+                    <TableHeadData key={generateID(11)}>
                       {head.toUpperCase()}
-                    </TableHeadContent>
+                    </TableHeadData>
                   ))}
                 </TableRow>
               </TableHead>
