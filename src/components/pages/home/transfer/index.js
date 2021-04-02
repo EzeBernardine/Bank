@@ -1,12 +1,6 @@
 import { Styles } from "./styles";
-// import { useState } from "react";
-import { Flex, Frame, Grid } from "../../../UI_Components/Box/styles";
-import {
-  Paragraph,
-  Header5,
-  Bold,
-  Span,
-} from "../../../UI_Components/Fonts/styles";
+import { Flex, Grid } from "../../../UI_Components/Box/styles";
+import { Paragraph, Header5, Span } from "../../../UI_Components/Fonts/styles";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { ArrowDownIcon, TransferIcon } from "../../../assest/svg";
@@ -14,19 +8,20 @@ import { InputStyles } from "../../../UI_Components/Input/styles";
 
 const Transfer = () => {
   const validationSchema = yup.object().shape({
-    title: yup.string().min(2).required("Provide title"),
-    accountnumber: yup.string().min(2).required("Provide valid email"),
+    amount: yup.number().required("Provide an amount"),
+    accountnumber: yup.number().min(2).required("Provide valid account number"),
+    bank: yup.string().min(2).required("Provide valid bank name"),
   });
   return (
     <Styles className="App">
       <Flex justify="flex-start">
         <Flex margin="0 0 30px 0" justify="flex-start" warning>
           <Flex margin="0 0 30px 0" justify="flex-start">
-            <Header5 colorTheme='grey[500]' spacing=".4rem" bold>
+            <Header5 colorTheme="grey[500]" spacing=".4rem" bold>
               Transfers
             </Header5>
           </Flex>
-          <Paragraph colorTheme='grey[400]' spacing=".025rem" lineHeight="25px">
+          <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
             Transfers on this platform can be either directly, ie to another
             account user, or to the bank. Just fill in the form and you are good
             to go.
@@ -35,56 +30,48 @@ const Transfer = () => {
 
         <Formik
           initialValues={{
-            network: "",
-            description: "",
+            amount: "",
+            accountnumber: "",
+            bank: "",
           }}
           validationSchema={validationSchema}
           onSubmit={async () => []}
         >
-          {({ handleChange, values: { network } }) => (
+          {({ handleChange, values: { accountnumber, bank, amount } }) => (
             <Form>
               <Grid className="input-container" gap="18px">
-                <div>
-                  <Flex className="input-wrap" justify="space-between">
-                    <label htmlFor="cardnumber">Amount</label>
+                <Flex className="input-wrap" justify="space-between">
+                  <label htmlFor="cardnumber">Amount</label>
+                  <InputStyles>
                     <Field
                       type="text"
                       name="amount"
                       placeholder="Amount"
                       id="cardnumber"
+                      value={amount}
                     />
-                  </Flex>
-                  <ErrorMessage name="amount" component="div" />
-                </div>
+                    <ErrorMessage name="amount" component="div" />
+                  </InputStyles>
+                </Flex>
 
-                <div>
-                  <Flex className="input-wrap" justify="space-between">
-                    <label htmlFor="accountnumber">Recepient Account</label>
+                <Flex className="input-wrap" justify="space-between">
+                  <label htmlFor="accountnumber">Recepient Account </label>
+                  <InputStyles>
                     <Field
                       type="text"
                       name="accountnumber"
                       id="accountnumber"
                       placeholder="Account Number"
+                      value={accountnumber}
                     />
-                  </Flex>
-                  <ErrorMessage name="name" component="div" />
-                </div>
+                    <ErrorMessage name="accountnumber" component="div" />
+                  </InputStyles>
+                </Flex>
 
-                <Flex
-                  className="input-wrap network"
-                  align="stretch"
-                  flexDir="column"
-                >
-                  <label htmlFor="cardnumber">
-                    Select your service provider
-                  </label>
+                <Flex className="input-wrap" justify="space-between">
+                  <label htmlFor="bank">Select your service provider</label>
                   <InputStyles>
-                    <Field
-                      as="select"
-                      name="network"
-                      id="cardnumber"
-                      value={network}
-                    >
+                    <Field as="select" name="bank" id="bank" value={bank}>
                       <option defaultValue="">Select</option>
                       <option value="Access Bank Plc">Access Bank Plc</option>
                       <option value="Fidelity Bank Plc">
@@ -112,7 +99,7 @@ const Transfer = () => {
                       height="15px"
                       color=" #b2aabd"
                     />
-                    <ErrorMessage name="network" component="div" />
+                    <ErrorMessage name="bank" component="div" />
                   </InputStyles>
                 </Flex>
 

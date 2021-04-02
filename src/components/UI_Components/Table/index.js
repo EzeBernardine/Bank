@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { CustomTableMain, Td, Paginator } from "./styles";
+import {
+  CustomTableMain,
+  TableData,
+  Paginator,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeadContent,
+} from "./styles";
 import { generateID } from "../../../lib/generateID";
 import PropTypes from "prop-types";
 import { OverFlowScrollBar } from "../OverflowScroll/styles";
@@ -8,77 +16,102 @@ import Pagination from "../Paginator";
 const CustomTable = ({
   tableBody,
   tableHead,
-  theadColor,
-  theadBkColor,
-  rowClick,
-  tbodyColor,
   rowHovColor,
-  bottomGap,
+  gap,
   paginator,
   pageSize,
   firstLast,
   prevNext,
+  tableBodyShowMore,
 }) => {
   const [pageOfItems, setPageOfItems] = useState([]);
-
+  const [isOpen, setIsOpen] = useState([]);
   const [tableData] = useState(tableBody);
 
-  const onChangePage = (items) => {
-    setPageOfItems(items);
-  };
+  const onChangePage = (items) => setPageOfItems(items);
 
-  const returnTableRow = (data) => {
+  const handleOpenTable = (idx) =>
+    isOpen === idx ? setIsOpen(-1) : setIsOpen(idx);
+
+  const returnTableRow = (data, idx, isOpen) => {
+    let index = idx + 1;
     let __data = { ...data };
     delete __data._id;
 
     return (
-      <tr key={generateID(17)} onClick={() => rowClick(data)}>
-        {Object.values(__data).map((item, i) => (
-          <Td
-            theadColor={theadColor}
-            tbodyColor={tbodyColor}
-            head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
-            className={
-              (Object.keys(data)[i] &&
-                Object.keys(data)[i].replace(/'/g, "")) ||
-              ""
-            }
-            id={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
-            key={generateID(14)}
-          >
-            {item}
-          </Td>
-        ))}
-      </tr>
+      <>
+        <TableRow key={generateID(17)} onClick={() => handleOpenTable(index)}>
+          {Object.values(__data).map((item, i) => (
+            <TableData
+              head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
+              className={
+                (Object.keys(data)[i] &&
+                  Object.keys(data)[i].replace(/'/g, "")) ||
+                ""
+              }
+              id={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
+              key={generateID(14)}
+            >
+              {item}
+            </TableData>
+          ))}
+        </TableRow>
+        <TableRow
+          key={generateID(12)}
+          id="moreTableContent"
+          className={`moreTableContent`}
+          style={{
+            display: `${isOpen === index ? "table-row" : "none"}`,
+          }}
+        >
+          {Object.values(__data).map((item, i) => (
+            <TableData
+              head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
+              className={
+                (Object.keys(data)[i] &&
+                  Object.keys(data)[i].replace(/'/g, "")) ||
+                ""
+              }
+              id={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
+              key={generateID(14)}
+            >
+              {item}___
+            </TableData>
+          ))}
+        </TableRow>
+      </>
     );
   };
   return (
     <>
       {tableBody.length !== 0 ? (
         <CustomTableMain
-          theadColor={theadColor}
-          theadBkColor={theadBkColor}
-          bottomGap={bottomGap}
-          tbodyColor={tbodyColor}
+          gap={gap}
           rowHovColor={rowHovColor}
           paginator={paginator}
         >
           <OverFlowScrollBar className="container">
-            <table>
-              <thead>
-                <tr>
+            <Table>
+              <TableHead>
+                <TableRow>
                   {tableHead.map((head, i) => (
-                    <th key={generateID(11)}>{head.toUpperCase()}</th>
+                    <TableHeadContent key={generateID(11)}>
+                      {head.toUpperCase()}
+                    </TableHeadContent>
                   ))}
-                </tr>
-              </thead>
+                </TableRow>
+              </TableHead>
 
               <tbody>
                 {paginator
-                  ? pageOfItems.map((data, idx) => returnTableRow(data))
-                  : tableBody.map((data, idx) => returnTableRow(data))}
+                  ? pageOfItems.map((data, idx) =>
+                      returnTableRow(data, idx, isOpen)
+                    )
+                  : tableBody.map((data, idx) =>
+                      returnTableRow(data, idx, isOpen)
+                    )}
               </tbody>
-            </table>
+            </Table>
           </OverFlowScrollBar>
 
           <Paginator className="paginator" paginator={paginator}>
@@ -101,12 +134,9 @@ const CustomTable = ({
 CustomTable.propTypes = {
   // tableBody: PropTypes.array.isRequired,
   tableHead: PropTypes.array.isRequired,
-  theadColor: PropTypes.string,
-  theadBkColor: PropTypes.string,
   rowClick: PropTypes.func,
-  tbodyColor: PropTypes.string,
   rowHovColor: PropTypes.string,
-  bottomGap: PropTypes.string,
+  gap: PropTypes.string,
   pageSize: PropTypes.number,
   firstLast: PropTypes.any,
   paginator: PropTypes.any,

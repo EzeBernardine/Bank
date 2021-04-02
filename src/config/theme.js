@@ -9,7 +9,7 @@ const palette = {
     white,
   },
   primary: {
-    default: "orange",
+    default: "#de8430",
     main: "#fcb716",
     light: "#146DD6",
     contrastText: white,

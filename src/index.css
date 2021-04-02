@@ -30,7 +30,6 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
-  /* font-weight: 700; */
 }
 li,
 a,
@@ -52,7 +51,7 @@ input {
 }
 
 input:focus,
-textarea:focus {
+select:focus {
   border: 1px solid #de8430 !important;
   outline: none;
 }
@@ -64,6 +63,9 @@ button {
   padding: 11px 15px;
   cursor: pointer;
   border-radius: 4px;
+}
+button:focus {
+ outline: none
 }
 button:hover {
   background-color: #aa6524;
@@ -94,7 +96,6 @@ textarea {
 }
 label,
 legend {
-  color: #5b5551;
   font-size: 14px;
 }
 

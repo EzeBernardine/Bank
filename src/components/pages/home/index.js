@@ -1,11 +1,6 @@
 import { Styles, Section, Nav } from "./styles";
-import { Flex, Frame, Grid } from "../../UI_Components/Box/styles";
-import {
-  Paragraph,
-  Header5,
-  Bold,
-  Span,
-} from "../../UI_Components/Fonts/styles";
+import { Flex } from "../../UI_Components/Box/styles";
+import { Span } from "../../UI_Components/Fonts/styles";
 import Alert from "../../UI_Components/Alert";
 import Transfer from "./transfer";
 import Transactions from "./transactions";
@@ -23,7 +18,7 @@ const Home = () => {
       <Header />
 
       <Flex margin="30px  auto 0" width="80%">
-        <Alert type="success">
+        <Alert type="success" duration="7000">
           <Span>
             Welcome to this platform, hope you do have a great banking
             experience.

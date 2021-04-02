@@ -48,7 +48,27 @@ const Deposit = () => {
       fothCol: "flkkskfknk",
     },
   ];
-  const tableHead = ["Type", "Amount", "Status", "Date  ", "Narration"];
+  const showMore = [
+    {
+      showMore: "showMore",
+    },
+    {
+      showMore: "showMore",
+    },
+    {
+      showMore: "showMore",
+    },
+    {
+      showMore: "showMore",
+    },
+    {
+      showMore: "showMore",
+    },
+    {
+      showMore: "showMore",
+    },
+  ];
+  const tableHead = ["Type", "Amount", "Status", "Date  ", "Recipient"];
   return (
     <Styles className="App">
       <Flex margin="80px 0 30px 0" justify="flex-start">
@@ -66,13 +86,12 @@ const Deposit = () => {
       </Flex>
 
       <CustomTable
-        theadBkColor="white"
-        bottomGap="5px"
+        gap="5px"
         tableHead={tableHead}
         tableBody={tableContent}
+        tableBodyShowMore={showMore}
         rowHovColor="#d2ccc626"
-        theadColor="#864b26"
-        tbodyColor="#5b5551"
+        rowClick={(data) => console.log(data)}
         handleReadAll={() => []}
         pageSize={5}
         paginator

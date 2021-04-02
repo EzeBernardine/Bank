@@ -2,93 +2,22 @@ import styled from "styled-components";
 
 export const CustomTableMain = styled.section`
   .container {
-    /* overflow-x: visible; */
-    /* overflow-y: scroll; */
-
     overflow-y: visible;
     overflow-x: scroll;
   }
   background: white;
   padding-bottom: ${({ paginator }) => !paginator && "20px"};
-  table {
-    background: white;
-    border-collapse: collapse;
-    text-align: start;
-    width: 100%;
-    thead {
-      background: ${({ theadBkColor }) => theadBkColor || "#fff"};
-      tr {
-        th {
-          text-align: start;
-          color: ${({ theadColor }) => theadColor || "#033"};
-          font-size: 16px;
-          padding: 0.8em 0 0.8rem 1.8rem;
-          min-width: 160px;
-          @media (max-width: 1200px) {
-            min-width: auto;
-          }
-        }
-      }
-    }
-    tbody {
-      tr {
-        background: white;
-        cursor: pointer;
-        border: none;
-        border-bottom: ${({ bottomGap }) =>
-          bottomGap ? `${bottomGap} solid   #fff` : "5px solid  #fff "};
-        &:hover {
-          box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.27);
-          background: ${({ rowHovColor }) =>
-            rowHovColor || "#fff7ee !important"};
-        }
-
-        .readAll {
-          color: #17a2b8;
-          cursor: pointer;
-          font-size: 0.75rem;
-        }
-
-        .empty {
-          width: max-content;
-          .showMoreModal {
-            bottom: -2px;
-            top: unset;
-          }
-          @media (min-width: 1200px) {
-            padding: 0;
-          }
-        }
-
-        &:nth-child(2n) {
-          background: #d2ccc626;
-        }
-      }
-    }
-    @media (max-width: 900px) {
-      thead {
-        display: none;
-      }
-      tbody {
-        tr {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-    }
-  }
 `;
 
-export const Td = styled.td`
+export const TableData = styled.td`
   padding: 1.2rem 1.8rem;
   font-weight: 400;
   font-size: 14px;
   span {
     font-size: 0.8rem;
-    color: ${({ tbodyColor }) => tbodyColor || "#767675"};
+    color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#767675")};
   }
-
-  color: ${({ tbodyColor }) => tbodyColor || "#767675"};
+  color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#767675")};
   @media (max-width: 1200px) {
     min-width: auto;
   }
@@ -109,7 +38,7 @@ export const Td = styled.td`
       font-weight: bold;
     }
     &:before {
-      content: ${({ head }) => `'${head}'`};
+      content: ${({ head }) => (head ? `'${head}'` : " ")};
       font-size: 0.7rem;
     }
   }
@@ -122,7 +51,7 @@ export const Td = styled.td`
   }
 `;
 
-export const Paginator = styled('div')`
+export const Paginator = styled("div")`
   background: white;
   padding: 1em 5px;
   display: ${({ paginator }) => (paginator ? "block" : "none")};
@@ -130,3 +59,51 @@ export const Paginator = styled('div')`
     justify-content: flex-end;
   }
 `;
+
+export const Table = styled.table`
+  background: white;
+  border-collapse: collapse;
+  text-align: start;
+  width: 100%;
+`;
+
+export const TableHead = styled.thead`
+  background: ${({ theme }) => (theme ? theme.palette.common.white : "#fff")};
+  :hover * {
+    background: ${({ theme }) => (theme ? theme.palette.common.white : "#fff")};
+    cursor: auto;
+  }
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+export const TableRow = styled.tr`
+  background: white;
+  cursor: pointer;
+  border: none;
+  border-bottom: ${({ gap }) =>
+    gap ? `${gap} solid   #fff` : "5px solid  #fff "};
+  &:hover {
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.27);
+    background: ${({ rowHovColor }) => rowHovColor || "#fff7ee !important"};
+  }
+  /* &:not(.moreTableContent):nth-child(2n) {
+    background: #d2ccc612;
+  } */
+  @media (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+export const TableHeadContent = styled.th`
+  text-align: start;
+  color: ${({ theme }) => (theme ? theme.palette.primary.default : "#033")};
+  font-size: 16px;
+  padding: 0.8em 0 0.8rem 1.8rem;
+  min-width: 160px;
+  @media (max-width: 1200px) {
+    min-width: auto;
+  }
+`;
+// export const Table = styled.table`
+// ` ;

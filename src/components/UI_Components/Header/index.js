@@ -1,5 +1,5 @@
 import { Styles } from "./styles";
-import { Flex, Frame, Grid } from "../../UI_Components/Box/styles";
+import {  Frame } from "../../UI_Components/Box/styles";
 import Image from "../../assest/banking.png";
 
 const Home = () => {

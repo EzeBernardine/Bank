@@ -8,26 +8,23 @@ export const Styles = styled.div`
     .input-container {
       max-width: 700px;
       margin-top: 50px;
-      > div {
-        width: 100%;
-        .input-wrap {
-          label {
-            margin-right: 15px;
-            color: #5b5551;
-          }
-          input,
-          textarea {
-            max-width: 450px;
-          }
 
-          @media (max-width: 950px) {
-            flex-direction: column;
-            align-items: stretch;
-            input,
-            textarea {
-              max-width: 100%;
-              margin-top: 10px;
-            }
+      .input-wrap {
+        label {
+          margin-right: 15px;
+          color: ${({theme}) => theme.palette.grey[300]};
+        }
+        > div {
+          max-width: 450px;
+        }
+
+        @media (max-width: 950px) {
+          flex-direction: column;
+          align-items: stretch;
+          input,
+          select {
+            max-width: 100%;
+            margin-top: 10px;
           }
         }
       }

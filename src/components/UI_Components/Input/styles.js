@@ -20,7 +20,7 @@ export const InputStyles = styled.div`
     position: absolute;
     top: 82%;
     font-size: 14px;
-    color: #de5930;
+    color: ${({theme}) =>theme.palette.error.main};
     margin: 0 auto 0 0;
   }
 `;

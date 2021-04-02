@@ -1,10 +1,17 @@
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 export const Styles = styled.div``;
 
 export const Section = styled.section`
   > div {
     position: relative;
+    @media (max-width: 700px) {
+      > div {
+        width: 100%;
+
+        padding: ${({ theme }) => theme.spacing.res_xxsmall};
+      }
+    }
   }
 `;
 export const Nav = styled.nav`
@@ -20,5 +27,8 @@ export const Nav = styled.nav`
     padding: ${({ theme }) => theme.spacing.xxsmall};
     margin: ${({ theme }) => theme.spacing.small + " 0"};
     cursor: pointer;
+  }
+  @media (max-width: 700px) {
+    display: none;
   }
 `;
