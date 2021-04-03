@@ -32,7 +32,7 @@ const Transactions = () => {
           created_at: formatDate(created_at) || "-",
           amount: amount || "-",
           account_id: account_id || "-",
-          name: meta.name || "-",
+          name: meta?.name || "-",
         };
 
         let more = {

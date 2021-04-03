@@ -27,17 +27,18 @@ const Transfer = () => {
   };
 
   const verify = async () => {
-    console.log(state);
     const data = await axios.post("http://localhost:3001/verify_account", {
       account_number: state.accountnumber,
       account_bank: state.bank,
       // account_number: "0690000032",
       // account_bank: "044",
     });
-    if (data.data.status === "success") {
-      return setStatus("Account verified") && setAccountVerified(true);
-    }
-    // console.log(data.data);
+    console.log(data.data);
+    return data.data.status === "success"
+      ? (setStatus("Account verified"), setAccountVerified(true))
+      : null;
+
+    // : null;
   };
 
   const transfer = async () => {
@@ -88,7 +89,6 @@ const Transfer = () => {
                     id="bank"
                     value={state.bank}
                     onChange={(e) => {
-                      console.log(e.target.value.trim());
                       setState((prev) => ({
                         ...prev,
                         bank: e.target.value,
@@ -108,7 +108,7 @@ const Transfer = () => {
                     )}
                   </select>
                   <ArrowDownIcon width="15px" height="15px" color="#b2aabd" />
-                  <div name="bank" component="div" />
+                  {/* <div name="bank" component="div" /> */}
                 </InputStyles>
               </Flex>
             ) : null}
@@ -122,9 +122,9 @@ const Transfer = () => {
                     name="accountnumber"
                     id="accountnumber"
                     placeholder="Account Number"
+                    required
                     value={state.accountnumber}
                     onChange={(e) => {
-                      console.log(typeof e.target.value.trim());
                       setState((prev) => ({
                         ...prev,
                         accountnumber: e.target.value.trim(),
@@ -132,7 +132,7 @@ const Transfer = () => {
                     }}
                     onKeyUp={verify}
                   />
-                  <div name="accountnumber" component="div" />
+                  {/* <div ng-message="min || max">Incorret account number</div> */}
                 </InputStyles>
               </Flex>
             ) : null}
@@ -154,11 +154,13 @@ const Transfer = () => {
                         ...prev,
                         amount: parseInt(e.target.value.trim()),
                       }));
-                      console.log(state.amount);
                     }}
                     onKeyUp={verify}
                   />
-                  <div name="amount" component="div" />
+                  {/* <div name="amount" component="div" /> */}
+                  {/* <div ng-message="min || max">
+                    please enter in between 0.1 to 30.
+                  </div> */}
                 </InputStyles>
               </Flex>
             ) : null}
