@@ -23,7 +23,7 @@ const Transfer = () => {
   const getBanks = async () => {
     const data = await axios.get("http://localhost:3001/banks");
     // console.log(data.data.data);
-    setBanks(data.data.data);
+    return setBanks(data.data.data);
   };
 
   const verify = async () => {
@@ -35,10 +35,9 @@ const Transfer = () => {
       // account_bank: "044",
     });
     if (data.data.status === "success") {
-      setStatus("Account verified");
-      setAccountVerified(true);
+      return setStatus("Account verified") && setAccountVerified(true);
     }
-    console.log(data.data);
+    // console.log(data.data);
   };
 
   const transfer = async () => {
@@ -47,8 +46,8 @@ const Transfer = () => {
       account_bank: state.bank,
       amount: 5500,
     });
-    data.data.status === "success" && setStatus("Transfer sccuessful");
-    console.log(data.data);
+    // console.log(data.data);
+    return data.data.status === "success" && setStatus("Transfer sccuessful");
   };
 
   useEffect(() => {

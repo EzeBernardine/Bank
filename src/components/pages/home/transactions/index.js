@@ -34,25 +34,23 @@ const Transactions = () => {
           account_id: account_id || "-",
           name: meta.name || "-",
         };
-        arr.push(data);
 
         let more = {
           more: (
-            <span>
+            <Span colorTheme="primary.default" spacing=".025rem">
               {customer.name}, sent {currency}
               {amount} on {formatDate(created_at)}.
               <br /> Status: {status}
               <br /> Narration: {narration}
               <br /> Phone number: {customer.phone_number}.
               <br /> Customer email: {customer.email}.
-            </span>
+            </Span>
           ),
         };
-        emptyMore.push(more);
+        return emptyMore.push(more) && arr.push(data);
       }
     );
-    setTransactions(arr);
-    setMoreDetails(emptyMore);
+    return setTransactions(arr) && setMoreDetails(emptyMore);
   };
 
   useLayoutEffect(() => {

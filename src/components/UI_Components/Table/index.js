@@ -13,6 +13,7 @@ import { generateID } from "../../../lib/generateID";
 import PropTypes from "prop-types";
 import { OverFlowScrollBar } from "../OverflowScroll/styles";
 import Pagination from "../Paginator";
+import { Span } from "../Fonts/styles";
 
 const CustomTable = ({
   tableBody,
@@ -56,7 +57,11 @@ const CustomTable = ({
             display: `${isOpen === index ? "table-row" : "none"}`,
           }}
         >
-          <TableBodyData colSpan="5">{moreDetail[idx].more.props.children}</TableBodyData>
+          <TableBodyData colSpan="5">
+            <Span colorTheme="primary.default" spacing=".025rem">
+              {moreDetail[idx].more.props.children}
+            </Span>
+          </TableBodyData>
         </TableRowShowMore>
       </React.Fragment>
     );

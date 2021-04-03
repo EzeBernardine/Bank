@@ -116,6 +116,10 @@ export const TableRowShowMore = styled.tr`
     flex-direction: column;
     > td {
       text-align: center;
+      span {
+        display: inline-block;
+        width: 100%;
+      }
     }
   }
 `;
