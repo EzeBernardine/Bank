@@ -41,13 +41,13 @@ const Transfer = () => {
 
   const transfer = async (e) => {
     e.preventDefault();
+    setAccountVerified(false);
     const data = await axios.post("http://localhost:3001/make_transfer", {
       account_number: state.accountnumber,
       account_bank: state.bank,
       amount: state.amount,
     });
 
-    setAccountVerified(false);
     setState({
       accountnumber: "",
       bank: "",
@@ -80,7 +80,7 @@ const Transfer = () => {
         </Flex>
 
         {accountVerified ? (
-          <Alert type="success" duration="4000">
+          <Alert type="success" duration="3000">
             <Span>{status}</Span>
           </Alert>
         ) : null}
@@ -130,7 +130,6 @@ const Transfer = () => {
                     name="accountnumber"
                     id="accountnumber"
                     placeholder="Account Number"
-                    required
                     value={state.accountnumber}
                     onChange={(e) => {
                       setState((prev) => ({
