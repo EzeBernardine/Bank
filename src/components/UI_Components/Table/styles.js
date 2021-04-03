@@ -114,6 +114,9 @@ export const TableRowShowMore = styled.tr`
   @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
+    > td {
+      text-align: center;
+    }
   }
 `;
 export const TableHeadData = styled.th`

@@ -23,7 +23,7 @@ const CustomTable = ({
   pageSize,
   firstLast,
   prevNext,
-  tableBodyShowMore,
+  moreDetail,
 }) => {
   const [pageOfItems, setPageOfItems] = useState([]);
   const [isOpen, setIsOpen] = useState([]);
@@ -56,20 +56,7 @@ const CustomTable = ({
             display: `${isOpen === index ? "table-row" : "none"}`,
           }}
         >
-          {Object.values(__data).map((item, i) => (
-            <TableBodyData
-              head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
-              className={
-                (Object.keys(data)[i] &&
-                  Object.keys(data)[i].replace(/'/g, "")) ||
-                ""
-              }
-              id={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
-              key={generateID(14)}
-            >
-              {item}___
-            </TableBodyData>
-          ))}
+          <TableBodyData colSpan="5">{moreDetail[idx].more}</TableBodyData>
         </TableRowShowMore>
       </React.Fragment>
     );

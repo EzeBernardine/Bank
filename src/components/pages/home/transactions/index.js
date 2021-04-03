@@ -48,26 +48,48 @@ const Deposit = () => {
       fothCol: "flkkskfknk",
     },
   ];
-  const showMore = [
+  const moreDetail = [
     {
-      showMore: "showMore",
+      more: (
+        <span>
+          Transfers on this platform can be either directly, ie to another
+          account user, or to the bank. Just fill in the form and you are good
+          to go.
+        </span>
+      ),
     },
     {
-      showMore: "showMore",
+      more: (
+        <span>
+          Transfers on this platform can be either directly, ie to another
+          account user, or to the bank. Just fill in the form and you are good
+          to go.
+        </span>
+      ),
     },
     {
-      showMore: "showMore",
+      more: <span>T either direct the form and you are good to go.</span>,
     },
     {
-      showMore: "showMore",
+      more: (
+        <span>
+          Taaaaaaaaaaa a a a a aI bank. Just fill in the form and you are good
+          to go.
+        </span>
+      ),
     },
     {
-      showMore: "showMore",
+      more: <span>e bank. Just fill d you are good to go.</span>,
     },
     {
-      showMore: "showMore",
+      more: (
+        <span>
+          kaka jnajks jakj bank. Just fill in the form and you are good to go.
+        </span>
+      ),
     },
   ];
+
   const tableHead = ["Type", "Amount", "Status", "Date  ", "Recipient"];
   return (
     <Styles className="App">
@@ -89,7 +111,7 @@ const Deposit = () => {
         gap="0px"
         tableHead={tableHead}
         tableBody={tableContent}
-        tableBodyShowMore={showMore}
+        moreDetail={moreDetail}
         rowHovColor="#d2ccc626"
         rowClick={(data) => console.log(data)}
         handleReadAll={() => []}
