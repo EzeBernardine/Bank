@@ -10,6 +10,7 @@ import Alert from "../../../UI_Components/Alert";
 
 const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [status, setStatus] = useState(false);
 
   const [banks, setBanks] = useState([]);
@@ -32,30 +33,33 @@ const Transfer = () => {
       // account_number: "0690000032",
       // account_bank: "044",
     });
-    setAccountVerified(false);
 
     return data.data.status === "success"
-      ? (setStatus("Account verified"), setAccountVerified(true))
+      ? (setAlert(true),
+        setStatus("Account verified"),
+        setAccountVerified(true))
       : null;
   };
 
   const transfer = async (e) => {
     e.preventDefault();
-    setAccountVerified(false);
+    setAlert(false);
+
     const data = await axios.post("http://localhost:3001/make_transfer", {
       account_number: state.accountnumber,
       account_bank: state.bank,
       amount: state.amount,
     });
 
-    setState({
-      accountnumber: "",
-      bank: "",
-      amount: "",
-    });
-
     return data.data.status === "success"
-      ? (setStatus("Transfer sccuessful"), setAccountVerified(true))
+      ? (setStatus("Transfer sccuessful"),
+        setAlert(true),
+        setAccountVerified(false),
+        setState({
+          accountnumber: "",
+          bank: "",
+          amount: "",
+        }))
       : null;
   };
 
@@ -79,7 +83,7 @@ const Transfer = () => {
           </Paragraph>
         </Flex>
 
-        {accountVerified ? (
+        {alert ? (
           <Alert type="success" duration="3000">
             <Span>{status}</Span>
           </Alert>
@@ -87,7 +91,7 @@ const Transfer = () => {
 
         <form>
           <Grid className="input-container" gap="18px">
-            {!accountVerified || status === "Transfer sccuessful" ? (
+            {!accountVerified ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="bank">Select Bank</label>
                 <InputStyles>
@@ -121,7 +125,7 @@ const Transfer = () => {
               </Flex>
             ) : null}
 
-            {!accountVerified || status === "Transfer sccuessful" ? (
+            {!accountVerified ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="accountnumber">Recepient Account </label>
                 <InputStyles>
@@ -144,7 +148,7 @@ const Transfer = () => {
               </Flex>
             ) : null}
 
-            {accountVerified && status !== "Transfer sccuessful" ? (
+            {accountVerified ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="cardnumber">Amount</label>
                 <InputStyles>
@@ -170,7 +174,6 @@ const Transfer = () => {
 
             {/* ------------------button section-------------- */}
             {accountVerified &&
-            status !== "Transfer sccuessful" &&
             state.amount >= 100 &&
             state.amount <= 10000000 ? (
               <Flex className="btn" justify="flex-end" margin="23px 0 0 0">
