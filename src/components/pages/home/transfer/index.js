@@ -48,7 +48,9 @@ const Transfer = () => {
       amount: 5500,
     });
     // console.log(data.data);
-    return data.data.status === "success" && setStatus("Transfer sccuessful");
+    return data.data.status === "success"
+      ? setStatus("Transfer sccuessful")
+      : null;
   };
 
   useEffect(() => {

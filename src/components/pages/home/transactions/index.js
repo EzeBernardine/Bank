@@ -47,10 +47,12 @@ const Transactions = () => {
             </Span>
           ),
         };
-        return emptyMore.push(more) && arr.push(data);
+        arr.push(data);
+        return emptyMore.push(more);
       }
     );
-    return setTransactions(arr) && setMoreDetails(emptyMore);
+    setMoreDetails(emptyMore);
+    return setTransactions(arr);
   };
 
   useLayoutEffect(() => {
