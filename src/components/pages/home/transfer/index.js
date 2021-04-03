@@ -22,7 +22,6 @@ const Transfer = () => {
 
   const getBanks = async () => {
     const data = await axios.get("http://localhost:3001/banks");
-    // console.log(data.data.data);
     return setBanks(data.data.data);
   };
 
@@ -33,23 +32,25 @@ const Transfer = () => {
       // account_number: "0690000032",
       // account_bank: "044",
     });
-    console.log(data.data);
+    setAccountVerified(false);
+
     return data.data.status === "success"
       ? (setStatus("Account verified"), setAccountVerified(true))
       : null;
-
-    // : null;
   };
 
-  const transfer = async () => {
+  const transfer = async (e) => {
+    e.preventDefault();
     const data = await axios.post("http://localhost:3001/make_transfer", {
       account_number: state.accountnumber,
       account_bank: state.bank,
-      amount: 5500,
+      amount: state.amount,
     });
-    // console.log(data.data);
+
+    setAccountVerified(false);
+
     return data.data.status === "success"
-      ? setStatus("Transfer sccuessful")
+      ? (setStatus("Transfer sccuessful"), setAccountVerified(true))
       : null;
   };
 
@@ -175,7 +176,7 @@ const Transfer = () => {
                 <button
                   type="submit"
                   padding="15px 30px"
-                  onClick={() => transfer()}
+                  onClick={(e) => transfer(e)}
                 >
                   <Flex>
                     <Span
