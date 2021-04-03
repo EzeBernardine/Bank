@@ -48,6 +48,11 @@ const Transfer = () => {
     });
 
     setAccountVerified(false);
+    setState({
+      accountnumber: "",
+      bank: "",
+      amount: "",
+    });
 
     return data.data.status === "success"
       ? (setStatus("Transfer sccuessful"), setAccountVerified(true))
@@ -82,7 +87,7 @@ const Transfer = () => {
 
         <form>
           <Grid className="input-container" gap="18px">
-            {!accountVerified ? (
+            {!accountVerified || status === "Transfer sccuessful" ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="bank">Select Bank</label>
                 <InputStyles>
@@ -116,7 +121,7 @@ const Transfer = () => {
               </Flex>
             ) : null}
 
-            {!accountVerified ? (
+            {!accountVerified || status === "Transfer sccuessful" ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="accountnumber">Recepient Account </label>
                 <InputStyles>
@@ -140,7 +145,7 @@ const Transfer = () => {
               </Flex>
             ) : null}
 
-            {accountVerified === true ? (
+            {accountVerified && status !== "Transfer sccuessful" ? (
               <Flex className="input-wrap" justify="space-between">
                 <label htmlFor="cardnumber">Amount</label>
                 <InputStyles>
@@ -160,16 +165,13 @@ const Transfer = () => {
                     }}
                     onKeyUp={verify}
                   />
-                  {/* <div name="amount" component="div" /> */}
-                  {/* <div ng-message="min || max">
-                    please enter in between 0.1 to 30.
-                  </div> */}
                 </InputStyles>
               </Flex>
             ) : null}
 
             {/* ------------------button section-------------- */}
-            {accountVerified === true &&
+            {accountVerified &&
+            status !== "Transfer sccuessful" &&
             state.amount >= 100 &&
             state.amount <= 10000000 ? (
               <Flex className="btn" justify="flex-end" margin="23px 0 0 0">
