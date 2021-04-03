@@ -8,7 +8,15 @@ import { formatDate } from "../../../../lib/factory.lib";
 
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
-
+  const transc = [
+    {
+      status: "defwe",
+      created_at: "vdds",
+      amount: "sdsdcw",
+      account_id: "dewe",
+      bank: "dwe",
+    },
+  ];
   const moreDetail = [
     {
       more: (
@@ -58,11 +66,11 @@ const Transactions = () => {
 
     data.data.data.map(({ bank, account_id, amount, created_at, status }) => {
       let data = {
-        status: status || '',
-        created_at: formatDate(created_at) || '',
-        amount: amount || '',
-        account_id: account_id  || '',
-        bank: bank || '', 
+        status: status || "",
+        created_at: formatDate(created_at) || "",
+        amount: amount || "",
+        account_id: account_id || "",
+        bank: bank || "",
       };
       arr.push(data);
     });
@@ -91,23 +99,21 @@ const Transactions = () => {
         </Paragraph>
       </Flex>
 
-      {transactionsData.map((i, id) => {
-        console.log(transactionsData.length, '__________________');
-        // console.log(i.amount);
-        return <p key={id}>{i.amount}</p>;
-      })}
+    
 
-      <CustomTable
-        gap="0px"
-        tableHead={tableHead}
-        tableBody={transactionsData}
-        moreDetail={moreDetail}
-        rowHovColor="#d2ccc626"
-        rowClick={(data) => console.log(data)}
-        handleReadAll={() => []}
-        pageSize={5}
-        paginator
-      />
+      {transactionsData.length > 0 ? (
+        <CustomTable
+          gap="0px"
+          tableHead={tableHead}
+          tableBody={transactionsData}
+          moreDetail={moreDetail}
+          rowHovColor="#d2ccc626"
+          rowClick={(data) => console.log(data)}
+          handleReadAll={() => []}
+          pageSize={5}
+          paginator
+        />
+      ) : null}
     </Styles>
   );
 };

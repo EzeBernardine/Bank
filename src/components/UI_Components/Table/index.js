@@ -37,7 +37,7 @@ const CustomTable = ({
   const returnTableRow = (data, idx, isOpen) => {
     let index = idx + 1;
     let __data = { ...data };
-    delete __data._id;
+    // delete __data._id;
 
     console.log(data, " data data data");
     return (
@@ -85,10 +85,9 @@ const CustomTable = ({
 
               <tbody>
                 {paginator
-                  ? pageOfItems.map((data, idx) => {
-                    console.log(data, '....................')
-                      returnTableRow(data, idx, isOpen);
-                    })
+                  ? pageOfItems.map((data, idx) =>
+                      returnTableRow(data, idx, isOpen)
+                    )
                   : tableBody.map((data, idx) =>
                       returnTableRow(data, idx, isOpen)
                     )}
