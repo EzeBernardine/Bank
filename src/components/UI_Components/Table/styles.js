@@ -39,7 +39,9 @@ export const TableBodyData = styled.td`
     }
     &:before {
       content: ${({ head }) => (head ? `'${head}'` : " ")};
+      color: ${({ theme }) => (theme ? theme.palette.grey[200] : "#033")};
       font-size: 0.7rem;
+      font-weight: 400;
     }
   }
   @media (max-width: 600px) {
@@ -71,7 +73,6 @@ export const TableHead = styled.thead`
   background: ${({ theme }) =>
     theme ? theme.palette.primary.default : "#fff"};
   :hover * {
-    /* background: ${({ theme }) => (theme ? theme.palette.common.white : "#fff")}; */
     cursor: auto;
   }
   > tr {
@@ -89,11 +90,27 @@ export const TableRow = styled.tr`
     gap ? `${gap} solid   #fff` : "5px solid  #fff "};
   &:hover {
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.27);
-    background: ${({ rowHovColor }) => rowHovColor || "#fff7ee !important"};
+    background: ${({ rowHovColor }) => rowHovColor || "#d2ccc621 !important"};
   }
-  /* &:not(.moreTableContent):nth-child(2n) {
-    background: #d2ccc612;
-  } */
+
+  @media (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+export const TableRowShowMore = styled.tr`
+  cursor: auto;
+  border: none;
+  box-shadow: inset 0 0 7px 8px rgba(105, 57, 33, 0.05);
+  background: linear-gradient(#ee6c2e21, #c6927e17);
+  @media (min-width: 600px) {
+    > td {
+      padding: 2rem 1.8rem;
+    }
+  }
+  * {
+    color: ${({ theme }) => theme.palette.grey[500]};
+  }
   @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
@@ -109,5 +126,3 @@ export const TableHeadData = styled.th`
     min-width: auto;
   }
 `;
-// export const Table = styled.table`
-// ` ;

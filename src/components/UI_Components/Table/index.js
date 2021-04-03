@@ -6,6 +6,7 @@ import {
   Table,
   TableHead,
   TableRow,
+  TableRowShowMore,
   TableHeadData,
 } from "./styles";
 import { generateID } from "../../../lib/generateID";
@@ -39,27 +40,18 @@ const CustomTable = ({
     delete __data._id;
 
     return (
-      <>
-        <TableRow key={generateID(17)} onClick={() => handleOpenTable(index)}>
+      <React.Fragment key={generateID(17)}>
+        <TableRow onClick={() => handleOpenTable(index)}>
           {Object.values(__data).map((item, i) => (
             <TableBodyData
               head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
-              className={
-                (Object.keys(data)[i] &&
-                  Object.keys(data)[i].replace(/'/g, "")) ||
-                ""
-              }
-              id={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
               key={generateID(14)}
             >
               {item}
             </TableBodyData>
           ))}
         </TableRow>
-        <TableRow
-          key={generateID(12)}
-          id="moreTableContent"
-          className={`moreTableContent`}
+        <TableRowShowMore
           style={{
             display: `${isOpen === index ? "table-row" : "none"}`,
           }}
@@ -78,10 +70,11 @@ const CustomTable = ({
               {item}___
             </TableBodyData>
           ))}
-        </TableRow>
-      </>
+        </TableRowShowMore>
+      </React.Fragment>
     );
   };
+
   return (
     <>
       {tableBody.length !== 0 ? (

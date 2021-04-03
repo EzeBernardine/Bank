@@ -86,7 +86,7 @@ const Deposit = () => {
       </Flex>
 
       <CustomTable
-        gap="5px"
+        gap="0px"
         tableHead={tableHead}
         tableBody={tableContent}
         tableBodyShowMore={showMore}

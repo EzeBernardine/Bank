@@ -36,6 +36,7 @@ export const Styles = styled.div`
       border-radius: 70px 70px 0 0;
       padding: 20px 40px 10px;
       background: #de8430;
+      color: ${({ theme }) => theme.palette.primary.dark};
     }
 
     @media (max-width: 700px) {

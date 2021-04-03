@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Styles = styled.div`
+  position: relative;
+  z-index: 10;
   .balance {
     background: linear-gradient(-30deg, #f7f5f3 53%, #fff 53%);
 

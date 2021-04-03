@@ -7,6 +7,7 @@ import Transactions from "./transactions";
 import Header from "../../UI_Components/Header";
 import { useRef } from "react";
 import BalanceCard from "./Card";
+import Bubbles from "../../UI_Components/Bubbles";
 
 const Home = () => {
   const transfer = useRef(null);
@@ -32,14 +33,22 @@ const Home = () => {
 
       <Section>
         <Flex align="flex-start">
-          <Nav>
-            <ul>
-              <li onClick={() => scrollToRef(transfer)}>Transfer</li>
-              <li onClick={() => scrollToRef(transactions)}>Transactions</li>
-            </ul>
-          </Nav>
+            <Nav>
+          <Bubbles
+            up={-60}
+            right={20}
+            center={-60}
+            down={-10}
+            thickness={[80, 50, 0, 10]} // [UP, RIGHT, CENTER, DOWN]
+          >
+              <ul>
+                <li onClick={() => scrollToRef(transfer)}>Transfer</li>
+                <li onClick={() => scrollToRef(transactions)}>Transactions</li>
+              </ul>
+          </Bubbles>
+            </Nav>
 
-          <Flex width="80%" padding="xlarge" className='main'>
+          <Flex width="80%" padding="xlarge" className="main">
             <TransactionDate>
               <Flex justify="flex-start" margin="0 0 70px 0">
                 <BalanceCard />
@@ -80,7 +89,15 @@ const Home = () => {
             </Flex>
 
             <Flex ref={transactions}>
-              <Transactions />
+              <Bubbles
+                up={-60}
+                right={0}
+                center={-60}
+                down={-10}
+                thickness={[80, 0, 20, 50]} // [UP, RIGHT, CENTER, DOWN]
+              >
+                <Transactions />
+              </Bubbles>
             </Flex>
           </Flex>
         </Flex>

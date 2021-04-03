@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Styles = styled.div`
   margin-bottom: ${({theme}) => theme.spacing.xxlarge};
+  position: relative;
+  z-index: 2;
   form {
     width: 100%;
     max-width: 800px;

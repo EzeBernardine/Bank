@@ -54,6 +54,3 @@ export const ListItems = styled("li")`
     background-color: #44444435;
   }
 `;
-// export const PaginatorStyles = styled("div")`
-
-// ` ;

@@ -3,13 +3,14 @@ import { Flex, Frame } from "../../../UI_Components/Box/styles";
 import { Small, Bold, Header4 } from "../../../UI_Components/Fonts/styles";
 import Image from "../../../assest/Icon awesome-sim-card.png";
 import Image2 from "../../../assest/Group 810.png";
+
 const Card = () => {
   return (
-    <Styles className="App">
+    <Styles>
       <Flex className="balance" align="flex-start" maxWidth="350px">
         <Flex justify="space-between">
           <Flex width="max-content">
-            <Bold colorTheme="primary/dark">Wallet: </Bold>
+            <Bold colorTheme="primary/dark">ATM : </Bold>
             <Flex width="max-content" margin="0 0 0 10px">
               <Small colorTheme="grey[300]"> Virtal Card</Small>
             </Flex>

@@ -14,17 +14,12 @@ export const Styles = styled.header`
     span {
       margin-left: 15px;
     }
-    .logout {
-      display: flex;
-      padding: 0;
-      background: transparent;
-    }
+
     .welcomeNote {
       border-right: 1px solid #e1d9d4;
       padding-right: 10px;
     }
     .avatar {
-  
       cursor: pointer;
       position: relative;
       .image {
@@ -47,7 +42,7 @@ export const Styles = styled.header`
           z-index: 1000;
         }
         @media (max-width: 700px) {
-          position: fixed;  
+          position: fixed;
           top: 0;
           cursor: auto;
           bottom: 0;
@@ -57,6 +52,12 @@ export const Styles = styled.header`
           width: 100%;
         }
       }
+    }
+    .logout {
+      display: flex;
+      padding: 0;
+      background: transparent;
+      color: ${({ theme }) => theme.palette.grey[200]};
     }
   }
   @media (max-width: 700px) {

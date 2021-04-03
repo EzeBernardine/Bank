@@ -31,7 +31,7 @@ const ProfileCard = () => {
               flexWrap="nowrap"
             >
               <Flex width="1px" minWidth="15px">
-                <CityIcon width="15px" height="15px" colorTheme="black" />
+                <CityIcon width="15px" height="15px"  />
               </Flex>
               <Span colorTheme="primary/dark" align="start">
                 city
@@ -45,7 +45,7 @@ const ProfileCard = () => {
               flexWrap="nowrap"
             >
               <Flex width="1px" minWidth="15px">
-                <PhoneIcon width="15px" height="15px" colorTheme="black" />
+                <PhoneIcon width="15px" height="15px" />
               </Flex>
               <Span colorTheme="primary/dark" align="start">
                 08000000000
@@ -59,7 +59,7 @@ const ProfileCard = () => {
               flexWrap="nowrap"
             >
               <Flex width="16px" minWidth="16px">
-                <LocationIcon width="16px" height="16px" colorTheme="black" />
+                <LocationIcon width="16px" height="16px"  />
               </Flex>
               <Span colorTheme="primary/dark" align="start">
                 Address
