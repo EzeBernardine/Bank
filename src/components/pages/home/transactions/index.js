@@ -1,6 +1,6 @@
 import { Styles } from "./styles";
 import { Flex } from "../../../UI_Components/Box/styles";
-import { Paragraph, Header5 } from "../../../UI_Components/Fonts/styles";
+import { Paragraph, Header5, Span } from "../../../UI_Components/Fonts/styles";
 import CustomTable from "../../../UI_Components/Table";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
@@ -8,81 +8,58 @@ import { formatDate } from "../../../../lib/factory.lib";
 
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
-  const transc = [
-    {
-      status: "defwe",
-      created_at: "vdds",
-      amount: "sdsdcw",
-      account_id: "dewe",
-      bank: "dwe",
-    },
-  ];
-  const moreDetail = [
-    {
-      more: (
-        <span>
-          Transfers on this platform can be either directly, ie to another
-          account user, or to the bank. Just fill in the form and you are good
-          to go.
-        </span>
-      ),
-    },
-    {
-      more: (
-        <span>
-          Transfers on this platform can be either directly, ie to another
-          account user, or to the bank. Just fill in the form and you are good
-          to go.
-        </span>
-      ),
-    },
-    {
-      more: <span>T either direct the form and you are good to go.</span>,
-    },
-    {
-      more: (
-        <span>
-          Taaaaaaaaaaa a a a a aI bank. Just fill in the form and you are good
-          to go.
-        </span>
-      ),
-    },
-    {
-      more: <span>e bank. Just fill d you are good to go.</span>,
-    },
-    {
-      more: (
-        <span>
-          kaka jnajks jakj bank. Just fill in the form and you are good to go.
-        </span>
-      ),
-    },
-  ];
+  const [moreDetail, setMoreDetails] = useState([]);
 
   const transactions = async () => {
     const data = await axios.get("http://localhost:3001/transactions");
 
     let arr = [];
+    let emptyMore = [];
 
-    data.data.data.map(({ bank, account_id, amount, created_at, status }) => {
-      let data = {
-        status: status || "",
-        created_at: formatDate(created_at) || "",
-        amount: amount || "",
-        account_id: account_id || "",
-        bank: bank || "",
-      };
-      arr.push(data);
-    });
+    data.data.data.map(
+      ({
+        account_id,
+        amount,
+        created_at,
+        status,
+        customer,
+        narration,
+        currency,
+        meta,
+      }) => {
+        let data = {
+          status: status || "-",
+          created_at: formatDate(created_at) || "-",
+          amount: amount || "-",
+          account_id: account_id || "-",
+          name: meta.name || "-",
+        };
+        arr.push(data);
+
+        let more = {
+          more: (
+            <span>
+              {customer.name}, sent {currency}
+              {amount} on {formatDate(created_at)}.
+              <br /> Status: {status}
+              <br /> Narration: {narration}
+              <br /> Phone number: {customer.phone_number}.
+              <br /> Customer email: {customer.email}.
+            </span>
+          ),
+        };
+        emptyMore.push(more);
+      }
+    );
     setTransactions(arr);
+    setMoreDetails(emptyMore);
   };
 
-  console.log(transactionsData, "transactionsData");
   useLayoutEffect(() => {
     transactions();
   }, []);
 
-  const tableHead = ["Type", "Amount", "Status", "Date  ", "Recipient"];
+  const tableHead = ["Status", "Date", "Amount", "ID  ", "Recipient"];
   return (
     <Styles className="App">
       <Flex margin="0 0 30px 0" justify="flex-start">
@@ -99,9 +76,7 @@ const Transactions = () => {
         </Paragraph>
       </Flex>
 
-    
-
-      {transactionsData.length > 0 ? (
+      {transactionsData.length > 0 && moreDetail.length > 0 ? (
         <CustomTable
           gap="0px"
           tableHead={tableHead}
@@ -113,7 +88,11 @@ const Transactions = () => {
           pageSize={5}
           paginator
         />
-      ) : null}
+      ) : (
+        <Span colorTheme="grey[400]" spacing=".025rem">
+          Loading...
+        </Span>
+      )}
     </Styles>
   );
 };

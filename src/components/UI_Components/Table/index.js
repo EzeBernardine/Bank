@@ -39,7 +39,6 @@ const CustomTable = ({
     let __data = { ...data };
     // delete __data._id;
 
-    console.log(data, " data data data");
     return (
       <React.Fragment key={generateID(17)}>
         <TableRow onClick={() => handleOpenTable(index)}>
@@ -57,7 +56,7 @@ const CustomTable = ({
             display: `${isOpen === index ? "table-row" : "none"}`,
           }}
         >
-          <TableBodyData colSpan="5">{moreDetail[idx].more}</TableBodyData>
+          <TableBodyData colSpan="5">{moreDetail[idx].more.props.children}</TableBodyData>
         </TableRowShowMore>
       </React.Fragment>
     );
