@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const Styles = styled.div`
   margin-bottom: ${({theme}) => theme.spacing.xxlarge};
   position: relative;
-  z-index: 2;
+  z-index: 10;
   form {
     width: 100%;
     max-width: 800px;
 
     .input-container {
       max-width: 700px;
-      margin-top: 50px;
 
       .input-wrap {
         label {

@@ -19,34 +19,23 @@ const Home = () => {
     <Styles className="App">
       <Header />
 
-      {/* <Flex margin="70px auto " width="80%">
-        <Alert
-          type="success"
-          // duration="7000"
-        >
-          <Span>
-            Welcome to this platform, hope you do have a great banking
-            experience.
-          </Span>
-        </Alert>
-      </Flex> */}
-
+     
       <Section>
         <Flex align="flex-start">
-            <Nav>
-          <Bubbles
-            up={-60}
-            right={20}
-            center={-60}
-            down={-10}
-            thickness={[80, 50, 0, 10]} // [UP, RIGHT, CENTER, DOWN]
-          >
+          <Nav>
+            <Bubbles
+              up={-60}
+              end={20}
+              center={-60}
+              down={-10}
+              thickness={[80, 50, 0, 10]} // [UP, RIGHT, CENTER, DOWN]
+            >
               <ul>
                 <li onClick={() => scrollToRef(transfer)}>Transfer</li>
                 <li onClick={() => scrollToRef(transactions)}>Transactions</li>
               </ul>
-          </Bubbles>
-            </Nav>
+            </Bubbles>
+          </Nav>
 
           <Flex width="80%" padding="xlarge" className="main">
             <TransactionDate>
@@ -61,17 +50,17 @@ const Home = () => {
                   margin="0 0 0 30px"
                 >
                   <Flex
-                    flexDir="column"
+                    direction="column"
                     align="flex-start"
                     width="calc( 50% - 25px)"
                     miWidth="max-content"
                   >
                     <Span colorTheme="grey[400]">Last Transfer</Span>
                     <Span colorTheme="grey[400]">Last Login</Span>
-                    <Span colorTheme="grey[400]">Last Withdrawal</Span>
+                    <Span colorTheme="grey[400]">Last .....</Span>
                   </Flex>
                   <Flex
-                    flexDir="column"
+                    direction="column"
                     align="flex-start"
                     width="calc( 50% - 25px)"
                     margin="0 0 0 15px"

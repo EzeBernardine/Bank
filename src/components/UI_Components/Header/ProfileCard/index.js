@@ -14,7 +14,7 @@ const ProfileCard = () => {
           </Frame>
         </Flex>
 
-        <Flex margin="0" flexDir="column" className="name-section">
+        <Flex margin="0" direction="column" className="name-section">
           <Header5 colorTheme="black" bold>
             Anonoymous
           </Header5>
@@ -22,8 +22,8 @@ const ProfileCard = () => {
           <Header5 colorTheme="primary/default"> Obinnna</Header5>
         </Flex>
 
-        <Flex flexDir="column" className="location-details">
-          <Grid flexDir="column" gap="0">
+        <Flex direction="column" className="location-details">
+          <Grid direction="column" gap="0">
             <Flex
               justify="flex-start"
               margin="10px 0"

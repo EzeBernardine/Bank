@@ -13,32 +13,6 @@ export const truncate = (str = "", length = 20, ending = "...") =>
     : str;
 
 /**
- * Capitalize
- * returns a capitalized sentence
- * @param {String} sentence
- * */
-export const capitalizeWords = (sentence) => {
-  if (!sentence) return;
-
-  if (sentence.length === 1) return sentence.toUpperCase();
-
-  return sentence
-    .toLowerCase()
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
-
-/**
- * getInitials
- * Returns the first letters of the passed strings
- * @param {String} fName
- * @param {String} lName
- * */
-export const getInitials = (fName = "", lName = "") =>
-  `${fName.charAt(0).toUpperCase()}${lName.charAt(0).toUpperCase()}`;
-
-/**
  * formatDate
  * Returns a moment formatted date
  * @param {Date} date
@@ -62,69 +36,18 @@ export const formatDate = (
   return moment(date).format(options.format);
 };
 
-/*
- * shadeColor
- * Lighten or Darken a color
- * usage [lighten]: shadeColor(#DD23EF, 20)
- * usage [darken]: shadeColor(#DD23EF, -20)
- * */
-export const shadeColor = (col, amt) => {
-  let usePound = false;
-
-  if (col[0] === "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
-
-  let num = parseInt(col, 16);
-
-  let r = (num >> 16) + amt;
-
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
-
-  let b = ((num >> 8) & 0x00ff) + amt;
-
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
-
-  let g = (num & 0x0000ff) + amt;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
-};
-
 /**
- * isNotEmpty return true if the object is not empty
- * @param {Object} obj
- * */
-export function isNotEmpty(obj) {
-  for (let prop in obj) {
-    if (obj.hasOwnProperty(prop)) return true;
-  }
-
-  return false;
-}
-
-/**
- *extractInThrees returns an array of strins splitted in threes
- */
-export function extractInThrees(str) {
-  return str.match(/.{1,4}/g);
-}
-
-/**
+ * getColorFromTheme
  *getColorFromTheme returns the  actual color of the   provided coloerTheme
+ * @param {String} colorTheme
+ * @param {Object} theme
  */
 export const getColorFromTheme = ({ colorTheme, theme }) => {
   return colorTheme
-    ? // -----------primary-----------
-      colorTheme === "primary/default"
+    ? colorTheme === "primary/default"
       ? theme.palette.primary.default
       : colorTheme === "primary/main"
-      ? theme.palette.primary.main //done
+      ? theme.palette.primary.main
       : colorTheme === "primary/light"
       ? theme.palette.primary.light
       : colorTheme === "primary/dark"
@@ -139,19 +62,19 @@ export const getColorFromTheme = ({ colorTheme, theme }) => {
       ? theme.palette.grey[400]
       : colorTheme === "grey[500]"
       ? theme.palette.grey[500]
-      : // -------------------  white----------------
-      colorTheme === "white"
+      : colorTheme === "white"
       ? theme.palette.common.white
-      : // -----------------------background----------
-      colorTheme === "black"
+      : colorTheme === "black"
       ? theme.palette.common.black
-      : //   ----------------------lastlt--------------
-        "blue"
+      : "blue"
     : "'red";
 };
 
 /**
+ * getSpacingFromTheme
  *getSpacingFromTheme returns the  actual spcae of the   provided spacetheme
+ * @param {String} spacing
+ * @param {Object} theme
  */
 export const getSpacingFromTheme = ({ spacing, theme }) => {
   return spacing

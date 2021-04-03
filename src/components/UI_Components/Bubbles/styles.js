@@ -21,7 +21,7 @@ export const Wrapper = styled("div")`
   &:after {
     position: absolute;
     z-index: -1;
-    bottom: ${({ right = 20 }) => right + "%"};
+    bottom: ${({ end= 20 }) => end+ "%"};
     right: -50px;
     content: "";
     padding: ${({ thickness }) => thickness[1] + "px"};

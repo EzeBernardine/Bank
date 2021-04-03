@@ -2,52 +2,13 @@ import { Styles } from "./styles";
 import { Flex } from "../../../UI_Components/Box/styles";
 import { Paragraph, Header5 } from "../../../UI_Components/Fonts/styles";
 import CustomTable from "../../../UI_Components/Table";
+import axios from "axios";
+import { useLayoutEffect, useState } from "react";
+import { formatDate } from "../../../../lib/factory.lib";
 
-const Deposit = () => {
-  const tableContent = [
-    {
-      firstCol: "Deposit",
-      secondCol: "100000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "kfkskkn",
-    },
-    {
-      firstCol: "Transfer",
-      secondCol: "100000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "flkkskfknk",
-    },
-    {
-      firstCol: "Withdrawal",
-      secondCol: "100000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "kfkskkn",
-    },
-    {
-      firstCol: "Withdrawal",
-      secondCol: "100000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "flkkskfknk",
-    },
-    {
-      firstCol: "Deposit",
-      secondCol: "100000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "kfkskkn",
-    },
-    {
-      firstCol: "Deposit",
-      secondCol: "20000",
-      thirdCol: "8/21/2018",
-      fourthCol: "02/07/2020",
-      fothCol: "flkkskfknk",
-    },
-  ];
+const Transactions = () => {
+  const [transactionsData, setTransactions] = useState([]);
+
   const moreDetail = [
     {
       more: (
@@ -90,6 +51,29 @@ const Deposit = () => {
     },
   ];
 
+  const transactions = async () => {
+    const data = await axios.get("http://localhost:3001/transactions");
+
+    let arr = [];
+
+    data.data.data.map(({ bank, account_id, amount, created_at, status }) => {
+      let data = {
+        status: status || '',
+        created_at: formatDate(created_at) || '',
+        amount: amount || '',
+        account_id: account_id  || '',
+        bank: bank || '', 
+      };
+      arr.push(data);
+    });
+    setTransactions(arr);
+  };
+
+  console.log(transactionsData, "transactionsData");
+  useLayoutEffect(() => {
+    transactions();
+  }, []);
+
   const tableHead = ["Type", "Amount", "Status", "Date  ", "Recipient"];
   return (
     <Styles className="App">
@@ -107,10 +91,16 @@ const Deposit = () => {
         </Paragraph>
       </Flex>
 
+      {transactionsData.map((i, id) => {
+        console.log(transactionsData.length, '__________________');
+        // console.log(i.amount);
+        return <p key={id}>{i.amount}</p>;
+      })}
+
       <CustomTable
         gap="0px"
         tableHead={tableHead}
-        tableBody={tableContent}
+        tableBody={transactionsData}
         moreDetail={moreDetail}
         rowHovColor="#d2ccc626"
         rowClick={(data) => console.log(data)}
@@ -122,4 +112,4 @@ const Deposit = () => {
   );
 };
 
-export default Deposit;
+export default Transactions;

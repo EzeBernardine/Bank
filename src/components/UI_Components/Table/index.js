@@ -39,6 +39,7 @@ const CustomTable = ({
     let __data = { ...data };
     delete __data._id;
 
+    console.log(data, " data data data");
     return (
       <React.Fragment key={generateID(17)}>
         <TableRow onClick={() => handleOpenTable(index)}>
@@ -84,9 +85,10 @@ const CustomTable = ({
 
               <tbody>
                 {paginator
-                  ? pageOfItems.map((data, idx) =>
-                      returnTableRow(data, idx, isOpen)
-                    )
+                  ? pageOfItems.map((data, idx) => {
+                    console.log(data, '....................')
+                      returnTableRow(data, idx, isOpen);
+                    })
                   : tableBody.map((data, idx) =>
                       returnTableRow(data, idx, isOpen)
                     )}
@@ -114,6 +116,7 @@ const CustomTable = ({
 CustomTable.propTypes = {
   tableBody: PropTypes.array.isRequired,
   tableHead: PropTypes.array.isRequired,
+  moreDetail: PropTypes.array.isRequired,
   rowClick: PropTypes.func,
   rowHovColor: PropTypes.string,
   gap: PropTypes.string,

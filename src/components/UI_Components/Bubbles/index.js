@@ -1,11 +1,11 @@
 import React from "react";
 import { Wrapper, Container } from "./styles";
 
-const Index = ({ up, down, center, right, thickness, color, children }) => {
+const Index = ({ up, down, center, end, thickness, color, children }) => {
   return (
     <Wrapper
       up={up}
-      right={right}
+      end={end}
       center={center}
       down={down}
       thickness={thickness}
@@ -13,7 +13,7 @@ const Index = ({ up, down, center, right, thickness, color, children }) => {
     >
       <Container
         up={up}
-        right={right}
+        end={end}
         center={center}
         down={down}
         thickness={thickness}
