@@ -32,25 +32,23 @@ const Transactions = () => {
           customer,
           narration,
           currency,
-          meta,
+          payment_type,
         }) => {
           let data = {
             status: status || "-",
             created_at: formatDate(created_at) || "-",
             amount: amount || "-",
             account_id: account_id || "-",
-            name: meta?.name || "-",
+            name: customer.name || "-",
           };
 
           let more = {
             more: (
               <Span colorTheme="primary.default" spacing=".025rem">
-                {customer.name}, sent {currency}
-                {amount} on {formatDate(created_at)}.
-                <br /> Status: {status}
+                Payment type: {payment_type}
                 <br /> Narration: {narration}
                 <br /> Phone number: {customer.phone_number}.
-                <br /> Customer email: {customer.email}.
+                <br /> Recipient email: {customer.email}.
               </Span>
             ),
           };
