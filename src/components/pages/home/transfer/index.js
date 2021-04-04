@@ -36,7 +36,7 @@ const Transfer = () => {
 
     // set a warning if account number or bank nameis wrong
     data.data.name === "Error" &&
-      state.accountnumber.length > 8 &&
+      state.accountnumber.length > 10 &&
       state.bank.length > 0 &&
       setAlert([`error`, `Incorrect detail`]);
 
@@ -50,7 +50,7 @@ const Transfer = () => {
       ]);
 
     /**
-     *  sets verify state to true, thereby hidding the account number and bank elect form.
+     *  sets verify state to true, thereby hidding the accbanksount number and bank elect form.
      * this will display the amount field
      */
     return data.data.status === "success" && setAccountVerified(true);
