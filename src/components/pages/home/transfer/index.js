@@ -34,8 +34,11 @@ const Transfer = () => {
       // account_bank: "044",
     });
 
-    // set a warning if account number is wrong
-    data.data.name === "Error" && setAlert([`error`, `Incorrect detail`]);
+    // set a warning if account number or bank nameis wrong
+    data.data.name === "Error" &&
+      state.accountnumber.length > 0 &&
+      state.bank.length > 0 &&
+      setAlert([`error`, `Incorrect detail`]);
 
     // Call the alert component and return the details of the account
     data.data.status === "success" &&
@@ -168,7 +171,7 @@ const Transfer = () => {
                         ...prev,
                         bank: e.target.value,
                       }));
-                      verify()
+                      verify();
                     }}
                   >
                     <option defaultValue="">Select</option>
