@@ -10,10 +10,16 @@ import Alert from "../../../UI_Components/Alert";
 
 const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(false);
-  const [alert, setAlert] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [alert, setAlert] = useState({
+    verify: false,
+    transfered: false,
+  });
 
   const [banks, setBanks] = useState([]);
+  const dev = process.env.NODE_ENV === "development";
+  const url = dev
+    ? "http://localhost:3001/"
+    : "https://banktest-server-8080.herokuapp.com/";
 
   const [state, setState] = useState({
     accountnumber: "",
@@ -22,12 +28,12 @@ const Transfer = () => {
   });
 
   const getBanks = async () => {
-    const data = await axios.get("http://localhost:3001/banks");
+    const data = await axios.get(`${url}banks`);
     return setBanks(data.data.data);
   };
 
   const verify = async () => {
-    const data = await axios.post("http://localhost:3001/verify_account", {
+    const data = await axios.post(`${url}verify_account`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
       // account_number: "0690000032",
@@ -35,8 +41,7 @@ const Transfer = () => {
     });
 
     return data.data.status === "success"
-      ? (setAlert(true),
-        setStatus("Account verified"),
+      ? (setAlert((prev) => ({ ...prev, verify: "Account Verified" })),
         setAccountVerified(true))
       : null;
   };
@@ -44,16 +49,16 @@ const Transfer = () => {
   const transfer = async (e) => {
     e.preventDefault();
     setAlert(false);
+    setState({});
 
-    const data = await axios.post("http://localhost:3001/make_transfer", {
+    const data = await axios.post(`${url}make_transfer`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
       amount: state.amount,
     });
 
     return data.data.status === "success"
-      ? (setStatus("Transfer sccuessful"),
-        setAlert(true),
+      ? (setAlert((prev) => ({ ...prev, transfered: "Transfer succesful" })),
         setAccountVerified(false),
         setState({
           accountnumber: "",
@@ -83,9 +88,15 @@ const Transfer = () => {
           </Paragraph>
         </Flex>
 
-        {alert ? (
-          <Alert type="success" duration="3000">
-            <Span>{status}</Span>
+        {alert.verify ? (
+          <Alert type="success" duration={2000}>
+            <Span>{alert.verify}</Span>
+          </Alert>
+        ) : null}
+
+        {alert.transfered ? (
+          <Alert type="success" duration={2000}>
+            <Span>{alert.transfered}</Span>
           </Alert>
         ) : null}
 

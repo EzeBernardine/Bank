@@ -9,9 +9,13 @@ import { formatDate } from "../../../../lib/factory.lib";
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
   const [moreDetail, setMoreDetails] = useState([]);
+  const dev = process.env.NODE_ENV === "development";
+  const url = dev
+    ? "http://localhost:3001/"
+    : "https://banktest-server-8080.herokuapp.com/";
 
   const transactions = async () => {
-    const data = await axios.get("http://localhost:3001/transactions");
+    const data = await axios.get(`${url}transactions`);
 
     let arr = [];
     let emptyMore = [];

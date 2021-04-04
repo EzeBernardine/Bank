@@ -17,6 +17,7 @@ const Alert = ({ type, duration, children }) => {
       setTimeout(() => {
         setVisible(false);
       }, duration);
+
     return () => timeout && clearTimeout(timeout); //Clears the setTimeout to avoid errors
   });
 
