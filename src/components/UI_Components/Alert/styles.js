@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  margin: 30px 0;
+  margin-bottom: 30px;
   position: relative;
   padding: 10px 30px 10px 40px;
   border-radius: 4px;
   border: ${({ type, theme }) =>
     type === "success"
-      ? `1px solid ${theme.palette.success.main}`
+      ? `1px solid ${theme.palette.success.light}`
       : type === "warning"
       ? `px solid  ${theme.palette.warning.light}`
-      : `1px solid ${theme.palette.error.main}`};
+      : `1px solid ${theme.palette.error.light}`};
   background: ${({ type, theme }) =>
     type === "success"
       ? theme.palette.success.light

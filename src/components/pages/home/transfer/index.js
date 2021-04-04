@@ -11,7 +11,7 @@ import { theme } from "../../../../config/theme";
 
 const Transfer = () => {
   const [banks, setBanks] = useState([]);
-  const [accountVerified, setAccountVerified] = useState(false);
+  const [accountVerified, setAccountVerified] = useState(undefined);
   const [alert, setAlert] = useState([]);
   const [state, setState] = useState({
     accountnumber: "",
@@ -103,13 +103,17 @@ const Transfer = () => {
             per gallon for the same oil?
           </Paragraph>
 
-          <Alert type={"warning"} duration={8000}>
-            <Span size="14px">
-              For the meantime, do select access bank as the reciepient bank,
-              and 0690000032 for account number. We will do well to make it
-              dynamic in our next release.
-            </Span>
-          </Alert>
+          {accountVerified === undefined ? (
+            <Flex margin="30px 0 0">
+              <Alert type={"warning"} duration={10000}>
+                <Span size="14px">
+                  For the meantime, do select access bank as the reciepient
+                  bank, and 0690000032 for account number. We will do well to
+                  make it dynamic in our next release.
+                </Span>
+              </Alert>
+            </Flex>
+          ) : null}
         </Flex>
 
         {alert.length > 0 ? (
@@ -159,7 +163,7 @@ const Transfer = () => {
                     onKeyUp={verify}
                   >
                     <option defaultValue="">Select</option>
-                    {banks ? (
+                    {banks.length > 0 ? (
                       banks.map(({ name, code }) => (
                         <option value={code} key={generateID(16)}>
                           {name}
