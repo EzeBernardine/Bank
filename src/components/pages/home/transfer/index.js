@@ -98,6 +98,7 @@ const Transfer = () => {
               Transfer
             </Header5>
           </Flex>
+
           <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
             Is it legal for an oil company to charge customers a different price
             per gallon for the same oil?
@@ -170,11 +171,11 @@ const Transfer = () => {
                         </option>
                       ))
                     ) : (
-                      <option value="">loading ...</option>
+                     
+                      <option value="">Loading ...</option>
                     )}
                   </select>
                   <ArrowDownIcon width="15px" height="15px" color="#b2aabd" />
-                  {/* <div name="bank"  /> */}
                 </InputStyles>
               </Flex>
             ) : null}
@@ -197,7 +198,6 @@ const Transfer = () => {
                     }}
                     onKeyUp={verify}
                   />
-                  {/* <div ng-message="min || max">Incorret account number</div> */}
                 </InputStyles>
               </Flex>
             ) : null}

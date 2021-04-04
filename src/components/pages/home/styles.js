@@ -47,8 +47,8 @@ export const Section = styled.section`
           width: 20px;
           background-color: ${({ theme }) => theme.palette.grey[100]};
           border-radius: 50%;
-          left: -58px;
-          top: 0;
+          left: -59px;
+          top: 6px;
         }
       }
     }

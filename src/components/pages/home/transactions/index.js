@@ -5,11 +5,12 @@ import CustomTable from "../../../UI_Components/Table";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../../lib/factory.lib";
+import Loader from "../../../UI_Components/Loader";
 
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
   const [moreDetail, setMoreDetails] = useState([]);
-  
+
   useEffect(() => {
     const dev = process.env.NODE_ENV === "development";
     const url = dev
@@ -93,9 +94,7 @@ const Transactions = () => {
           paginator
         />
       ) : (
-        <Span colorTheme="grey[400]" spacing=".025rem">
-          Loading...
-        </Span>
+        <Loader />
       )}
     </Styles>
   );
