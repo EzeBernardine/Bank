@@ -19,7 +19,7 @@ const Alert = ({ type, duration, children }) => {
       }, duration);
 
     return () => timeout && clearTimeout(timeout); //Clears the setTimeout to avoid errors
-  }, [children]);
+  }, [children, duration]);
 
   return (
     <>
