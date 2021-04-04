@@ -11,7 +11,8 @@ export const Styles = styled.div`
 
     .input-container {
       max-width: 700px;
-
+      position: relative;
+      z-index: 10;
       .input-wrap {
         label {
           margin-right: 15px;

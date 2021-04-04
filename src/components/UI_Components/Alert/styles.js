@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  position: relative;
+  z-index: 10;
   margin-bottom: 30px;
   position: relative;
   padding: 10px 30px 10px 40px;

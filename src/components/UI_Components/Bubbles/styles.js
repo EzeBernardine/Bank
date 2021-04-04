@@ -21,7 +21,7 @@ export const Wrapper = styled("div")`
   &:after {
     position: absolute;
     z-index: -1;
-    bottom: ${({ end= 20 }) => end+ "%"};
+    bottom: ${({ end = 20 }) => end + "%"};
     right: -50px;
     content: "";
     padding: ${({ thickness }) => thickness[1] + "px"};
@@ -75,5 +75,9 @@ export const Container = styled("div")`
           : " 1px solid #ff66001a"
         : "1px solid #ff66001a"};
     border-radius: 100%;
+  }
+  > * {
+    position: relative;
+    z-index: 5;
   }
 `;

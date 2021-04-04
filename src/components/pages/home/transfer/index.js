@@ -115,7 +115,7 @@ const Transfer = () => {
             end={20}
             center={-60}
             down={-10}
-            thickness={[80, 50, 0, 10]} // [UP, END, CENTER, DOWN]
+            thickness={[8, 5, 80, 50]} // [UP, END, CENTER, DOWN]
           >
             <Paragraph
               colorTheme="grey[400]"
