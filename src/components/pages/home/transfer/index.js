@@ -36,7 +36,7 @@ const Transfer = () => {
 
     // set a warning if account number or bank nameis wrong
     data.data.name === "Error" &&
-      state.accountnumber.length > 0 &&
+      state.accountnumber.length > 8 &&
       state.bank.length > 0 &&
       setAlert([`error`, `Incorrect detail`]);
 
