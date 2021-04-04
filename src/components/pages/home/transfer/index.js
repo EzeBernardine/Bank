@@ -8,10 +8,12 @@ import { useState, useEffect } from "react";
 import { generateID } from "../../../../lib/generateID";
 import Alert from "../../../UI_Components/Alert";
 import { theme } from "../../../../config/theme";
+// import Loader from "../../../UI_Components/Loader";
 
 const Transfer = () => {
   const [banks, setBanks] = useState([]);
   const [accountVerified, setAccountVerified] = useState(undefined);
+  const [loading, setLoading] = useState(undefined);
   const [alert, setAlert] = useState([]);
   const [state, setState] = useState({
     accountnumber: "",
@@ -31,6 +33,9 @@ const Transfer = () => {
       // account_number: "0690000032",
       // account_bank: "044",
     });
+
+    // set a warning if account number is wrong
+    data.data.name === "Error" && setAlert([`error`, `Incorrect detail`]);
 
     // Call the alert component and return the details of the account
     data.data.status === "success" &&
@@ -62,6 +67,9 @@ const Transfer = () => {
     // Call the alert component and return a success transsfer if transfer is successful
     data.data.status === "success" &&
       setAlert([`success`, `Transfer successful`]);
+
+    // reset loading state if transfer is successfull
+    data.data.status === "success" && setLoading(false);
 
     /**
      *  sets verify state to false.
@@ -160,8 +168,8 @@ const Transfer = () => {
                         ...prev,
                         bank: e.target.value,
                       }));
+                      verify()
                     }}
-                    onKeyUp={verify}
                   >
                     <option defaultValue="">Select</option>
                     {banks.length > 0 ? (
@@ -171,7 +179,6 @@ const Transfer = () => {
                         </option>
                       ))
                     ) : (
-                     
                       <option value="">Loading ...</option>
                     )}
                   </select>
@@ -220,35 +227,75 @@ const Transfer = () => {
                         amount: parseInt(e.target.value.trim()),
                       }));
                     }}
-                    onKeyUp={verify}
                   />
+
+                  {state.amount && state.amount < 100 ? (
+                    <div>Amount is too small</div>
+                  ) : state.amount > 10000000 ? (
+                    <div>Amount is too big</div>
+                  ) : null}
                 </InputStyles>
               </Flex>
             ) : null}
 
             {/* ------------------button section-------------- */}
-            {accountVerified &&
-            state.amount >= 100 &&
-            state.amount <= 10000000 ? (
+            {accountVerified ? (
               <Flex className="btn" justify="flex-end" margin="23px 0 0 0">
                 <button
                   type="submit"
                   padding="15px 30px"
-                  onClick={(e) => transfer(e)}
+                  disabled={
+                    loading ||
+                    !(state.amount >= 100 && state.amount <= 10000000)
+                  }
+                  style={{
+                    background: `${
+                      loading ||
+                      !(state.amount >= 100 && state.amount <= 10000000)
+                        ? theme.palette.grey[100]
+                        : theme.palette.primary.default
+                    }`,
+                    color: `${
+                      loading ||
+                      !(state.amount >= 100 && state.amount <= 10000000)
+                        ? theme.palette.grey[200]
+                        : theme.palette.common.white
+                    }`,
+                    cursor: `${
+                      loading ||
+                      !(state.amount >= 100 && state.amount <= 10000000)
+                        ? "not-allowed"
+                        : "pointer"
+                    }`,
+                  }}
+                  onClick={(e) => {
+                    transfer(e);
+                    setLoading(true);
+                  }}
                 >
-                  <Flex>
+                  {loading ? (
                     <Span
                       lineHeight="15px"
                       color={"#fff"}
                       className="drawerText"
                     >
-                      Transfer
+                      Loading...
                     </Span>
+                  ) : (
+                    <Flex>
+                      <Span
+                        lineHeight="15px"
+                        color={"#fff"}
+                        className="drawerText"
+                      >
+                        Transfer
+                      </Span>
 
-                    <Span lineHeight="15px" colorTheme={"white"}>
-                      <TransferIcon width="20px" height="20px" />
-                    </Span>
-                  </Flex>
+                      <Span lineHeight="15px" colorTheme={"white"}>
+                        <TransferIcon width="20px" height="20px" />
+                      </Span>
+                    </Flex>
+                  )}
                 </button>
               </Flex>
             ) : null}
