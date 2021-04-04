@@ -73,9 +73,7 @@ const Transactions = () => {
         </Flex>
 
         <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
-          Transfers on this platform can be either directly, ie to another
-          account user, or to the bank. Just fill in the form and you are good
-          to go.
+          Your recent transactions on this paltform.
         </Paragraph>
       </Flex>
 

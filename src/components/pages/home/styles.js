@@ -40,6 +40,7 @@ export const Section = styled.section`
       border-left: ${({ theme }) => "1px solid " + theme.palette.grey.line};
       > div {
         position: relative;
+
         &:not(:first-child):after {
           position: absolute;
           content: "";
@@ -49,6 +50,9 @@ export const Section = styled.section`
           border-radius: 50%;
           left: -59px;
           top: 6px;
+        }
+        > div {
+          width: 100%;
         }
       }
     }

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { generateID } from "../../../../lib/generateID";
 import Alert from "../../../UI_Components/Alert";
 import { theme } from "../../../../config/theme";
-// import Loader from "../../../UI_Components/Loader";
+import Bubbles from "../../../UI_Components/Bubbles";
 
 const Transfer = () => {
   const [banks, setBanks] = useState([]);
@@ -110,18 +110,36 @@ const Transfer = () => {
             </Header5>
           </Flex>
 
-          <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
-            Is it legal for an oil company to charge customers a different price
-            per gallon for the same oil?
-          </Paragraph>
+          <Bubbles
+            up={-60}
+            end={20}
+            center={-60}
+            down={-10}
+            thickness={[80, 50, 0, 10]} // [UP, END, CENTER, DOWN]
+          >
+            <Paragraph
+              colorTheme="grey[400]"
+              spacing=".025rem"
+              lineHeight="25px"
+            >
+              Transfers on this platform cannot be reversed.
+            </Paragraph>
+          </Bubbles>
 
           {accountVerified === undefined ? (
             <Flex margin="30px 0 0">
               <Alert type={"warning"} duration={10000}>
                 <Span size="14px">
-                  For the meantime, do select access bank as the reciepient
-                  bank, and 0690000032 for account number. We will do well to
-                  make it dynamic in our next release.
+                  For the meantime, do select{" "}
+                  <Span size="14px" weight="600">
+                    access bank
+                  </Span>{" "}
+                  as the reciepient bank, and{" "}
+                  <Span size="14px" weight="600">
+                    0690000032
+                  </Span>{" "}
+                  for account number. We will do well to make it dynamic in our
+                  next release.
                 </Span>
               </Alert>
             </Flex>
