@@ -25,6 +25,11 @@ const palette = {
     light: "#80fb765e",
     contrastText: white,
   },
+  warning: {
+    main: "#bdbd31",
+    light: "#f8f8da",
+    contrastText: white,
+  },
   grey: {
     100: "#EAEAEA",
     200: "#C9C5C5",

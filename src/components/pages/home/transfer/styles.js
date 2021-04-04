@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const Styles = styled.div`
-  margin-bottom: ${({theme}) => theme.spacing.xxlarge};
+  margin-bottom: ${({ theme }) => theme.spacing.xxlarge};
   position: relative;
   z-index: 10;
+  width: 100%;
   form {
     width: 100%;
     max-width: 800px;

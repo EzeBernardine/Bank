@@ -10,24 +10,19 @@ import Alert from "../../../UI_Components/Alert";
 import { theme } from "../../../../config/theme";
 
 const Transfer = () => {
+  const [banks, setBanks] = useState([]);
   const [accountVerified, setAccountVerified] = useState(false);
   const [alert, setAlert] = useState([]);
-  // const [alert, setAlert] = useState({
-  //   verify: false,
-  //   transfered: false,
-  // });
-
-  const [banks, setBanks] = useState([]);
-  const dev = process.env.NODE_ENV === "development";
-  const url = dev
-    ? "http://localhost:3001/"
-    : "https://banktest-server-8080.herokuapp.com/";
-
   const [state, setState] = useState({
     accountnumber: "",
     bank: "",
     amount: "",
   });
+
+  const dev = process.env.NODE_ENV === "development";
+  const url = dev
+    ? "http://localhost:3001/"
+    : "https://banktest-server-8080.herokuapp.com/";
 
   const verify = async () => {
     const data = await axios.post(`${url}verify_account`, {
@@ -37,14 +32,13 @@ const Transfer = () => {
       // account_bank: "044",
     });
 
-    console.log(data.data, "verifying");
-
     // Call the alert component and return the details of the account
     data.data.status === "success" &&
       setAlert([
+        `success`,
         `Account Verified.`,
-        ` Recipent name: ${data.data.data.account_name}.`,
-        `  Recipient account number: ${data.data.data.account_number}`,
+        `Recipent name: ${data.data.data.account_name}.`,
+        `Recipient account number: ${data.data.data.account_number}`,
       ]);
 
     /**
@@ -62,19 +56,28 @@ const Transfer = () => {
       account_bank: state.bank,
       amount: state.amount,
     });
-    // clear the alert for a remount
+    // clear the alert state for a remount
     setAlert("");
 
-    console.log(data.data, "transfering");
-
-    // Call the alert component and return a success transsfer
-    data.data.status === "success" && setAlert([`Transfer successful`]);
+    // Call the alert component and return a success transsfer if transfer is successful
+    data.data.status === "success" &&
+      setAlert([`success`, `Transfer successful`]);
 
     /**
      *  sets verify state to false.
      * this will return the original fields that where visile.
      */
-    return data.data.status === "success" && setAccountVerified(false);
+    data.data.status === "success" && setAccountVerified(false);
+
+    // reset the form data if transfer is successful
+    return (
+      data.data.status === "success" &&
+      setState({
+        accountnumber: "",
+        bank: "",
+        amount: "",
+      })
+    );
   };
 
   useEffect(() => {
@@ -96,21 +99,31 @@ const Transfer = () => {
             </Header5>
           </Flex>
           <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
-            Transfers on this platform can be either directly, ie to another
-            account user, or to the bank. Just fill in the form and you are good
-            to go.
+            Is it legal for an oil company to charge customers a different price
+            per gallon for the same oil?
           </Paragraph>
+
+          <Alert type={"warning"} duration={8000}>
+            <Span size="14px">
+              For the meantime, do select access bank as the reciepient bank,
+              and 0690000032 for account number. We will do well to make it
+              dynamic in our next release.
+            </Span>
+          </Alert>
         </Flex>
 
         {alert.length > 0 ? (
-          <Alert type="success" duration={10000}>
-            <Span> {alert[0]}</Span>
+          <Alert
+            type={alert[0]}
+            duration={alert[0] === "error" ? false : 10000}
+          >
+            <Span> {alert[1]}</Span>
 
-            {alert.length > 1 ? (
+            {alert.length > 2 ? (
               <Flex direction="column" align="flex-start">
-                {alert.map((item, i) => {
+                {alert.map((item, index) => {
                   return (
-                    !(i === 0) && (
+                    !(index === 0 || index === 1) && (
                       <Paragraph
                         weight="500"
                         key={generateID(13)}
@@ -157,7 +170,7 @@ const Transfer = () => {
                     )}
                   </select>
                   <ArrowDownIcon width="15px" height="15px" color="#b2aabd" />
-                  {/* <div name="bank" component="div" /> */}
+                  {/* <div name="bank"  /> */}
                 </InputStyles>
               </Flex>
             ) : null}
