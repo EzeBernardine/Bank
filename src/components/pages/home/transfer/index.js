@@ -27,11 +27,6 @@ const Transfer = () => {
     amount: "",
   });
 
-  const getBanks = async () => {
-    const data = await axios.get(`${url}banks`);
-    return setBanks(data.data.data);
-  };
-
   const verify = async () => {
     const data = await axios.post(`${url}verify_account`, {
       account_number: state.accountnumber,
@@ -69,8 +64,13 @@ const Transfer = () => {
   };
 
   useEffect(() => {
+    const getBanks = async () => {
+      const data = await axios.get(`${url}banks`);
+      return setBanks(data.data.data);
+    };
+
     getBanks();
-  }, []);
+  }, [url]);
 
   return (
     <Styles>
