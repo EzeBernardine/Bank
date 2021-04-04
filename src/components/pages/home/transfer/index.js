@@ -7,10 +7,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { generateID } from "../../../../lib/generateID";
 import Alert from "../../../UI_Components/Alert";
+import { theme } from "../../../../config/theme";
 
 const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(false);
-  const [alert, setAlert] = useState("");
+  const [alert, setAlert] = useState([]);
   // const [alert, setAlert] = useState({
   //   verify: false,
   //   transfered: false,
@@ -40,9 +41,11 @@ const Transfer = () => {
 
     // Call the alert component and return the details of the account
     data.data.status === "success" &&
-      setAlert(
-        `Account Verified. Recipent name: ${data.data.data.account_name}. Recipient account number: ${data.data.data.account_number}`
-      );
+      setAlert([
+        `Account Verified.`,
+        ` Recipent name: ${data.data.data.account_name}.`,
+        `  Recipient account number: ${data.data.data.account_number}`,
+      ]);
 
     /**
      *  sets verify state to true, thereby hidding the account number and bank elect form.
@@ -65,7 +68,7 @@ const Transfer = () => {
     console.log(data.data, "transfering");
 
     // Call the alert component and return a success transsfer
-    data.data.status === "success" && setAlert(`Transfer successful`);
+    data.data.status === "success" && setAlert([`Transfer successful`]);
 
     /**
      *  sets verify state to false.
@@ -99,9 +102,27 @@ const Transfer = () => {
           </Paragraph>
         </Flex>
 
-        {alert ? (
-          <Alert type="success" duration={3000}>
-            <Span>{alert}</Span>
+        {alert.length > 0 ? (
+          <Alert type="success" duration={10000}>
+            <Span> {alert[0]}</Span>
+
+            {alert.length > 1 ? (
+              <Flex direction="column" align="flex-start">
+                {alert.map((item, i) => {
+                  return (
+                    !(i === 0) && (
+                      <Paragraph
+                        weight="500"
+                        key={generateID(13)}
+                        style={{ color: `${theme.palette.grey[500]}` }}
+                      >
+                        {item}
+                      </Paragraph>
+                    )
+                  );
+                })}
+              </Flex>
+            ) : null}
           </Alert>
         ) : null}
 

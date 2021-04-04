@@ -19,7 +19,7 @@ export const Container = styled.div`
     color: ${({ type, theme }) =>
       type === "success"
         ? theme.palette.success.main
-        : theme.palette.error.main} !important;
+        : theme.palette.error.main} ;
   }
 
   > svg {
