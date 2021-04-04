@@ -15,7 +15,7 @@ export const TableBodyData = styled.td`
   font-size: 14px;
   span {
     font-size: 0.8rem;
-    color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#767675")};
+    padding: 5px 10px;
   }
   color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#767675")};
   @media (max-width: 1200px) {

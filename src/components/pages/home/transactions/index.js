@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../../lib/factory.lib";
 import Loader from "../../../UI_Components/Loader";
+import { theme } from "../../../../config/theme";
 
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
@@ -35,7 +36,21 @@ const Transactions = () => {
           payment_type,
         }) => {
           let data = {
-            status: status || "-",
+            status: (
+              <Flex
+                width="max-content"
+                style={{
+                  backgroundColor: `${
+                    status === "successful"
+                      ? theme.palette.success.main
+                      : theme.palette.error.main
+                  }`,
+                  borderRadius: "4px",
+                }}
+              >
+                <Span colorTheme="white">{status || "-"} </Span>
+              </Flex>
+            ),
             created_at: formatDate(created_at) || "-",
             amount: amount || "-",
             account_id: account_id || "-",
@@ -44,8 +59,7 @@ const Transactions = () => {
 
           let more = {
             more: (
-              <Span colorTheme="primary.default" spacing=".025rem">
-                Payment type: {payment_type}
+              <Span colorTheme="primary.default" spacing=".025rem">Payment type: {payment_type}
                 <br /> Narration: {narration}
                 <br /> Phone number: {customer.phone_number}.
                 <br /> Recipient email: {customer.email}.
