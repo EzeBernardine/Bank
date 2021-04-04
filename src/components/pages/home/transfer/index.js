@@ -10,10 +10,11 @@ import Alert from "../../../UI_Components/Alert";
 
 const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(false);
-  const [alert, setAlert] = useState({
-    verify: false,
-    transfered: false,
-  });
+  const [alert, setAlert] = useState("");
+  // const [alert, setAlert] = useState({
+  //   verify: false,
+  //   transfered: false,
+  // });
 
   const [banks, setBanks] = useState([]);
   const dev = process.env.NODE_ENV === "development";
@@ -35,32 +36,42 @@ const Transfer = () => {
       // account_bank: "044",
     });
 
-    return data.data.status === "success"
-      ? (setAlert((prev) => ({ ...prev, verify: "Account Verified" })),
-        setAccountVerified(true))
-      : null;
+    console.log(data.data, "verifying");
+
+    // Call the alert component and return the details of the account
+    data.data.status === "success" &&
+      setAlert(
+        `Account Verified. Recipent name: ${data.data.data.account_name}. Recipient account number: ${data.data.data.account_number}`
+      );
+
+    /**
+     *  sets verify state to true, thereby hidding the account number and bank elect form.
+     * this will display the amount field
+     */
+    return data.data.status === "success" && setAccountVerified(true);
   };
 
   const transfer = async (e) => {
     e.preventDefault();
-    setAlert(false);
-    setState({});
 
     const data = await axios.post(`${url}make_transfer`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
       amount: state.amount,
     });
+    // clear the alert for a remount
+    setAlert("");
 
-    return data.data.status === "success"
-      ? (setAlert((prev) => ({ ...prev, transfered: "Transfer succesful" })),
-        setAccountVerified(false),
-        setState({
-          accountnumber: "",
-          bank: "",
-          amount: "",
-        }))
-      : null;
+    console.log(data.data, "transfering");
+
+    // Call the alert component and return a success transsfer
+    data.data.status === "success" && setAlert(`Transfer successful`);
+
+    /**
+     *  sets verify state to false.
+     * this will return the original fields that where visile.
+     */
+    return data.data.status === "success" && setAccountVerified(false);
   };
 
   useEffect(() => {
@@ -88,15 +99,9 @@ const Transfer = () => {
           </Paragraph>
         </Flex>
 
-        {alert.verify ? (
-          <Alert type="success" duration={2000}>
-            <Span>{alert.verify}</Span>
-          </Alert>
-        ) : null}
-
-        {alert.transfered ? (
-          <Alert type="success" duration={2000}>
-            <Span>{alert.transfered}</Span>
+        {alert ? (
+          <Alert type="success" duration={3000}>
+            <Span>{alert}</Span>
           </Alert>
         ) : null}
 
