@@ -50,3 +50,16 @@ export const Styles = styled.div`
     }
   }
 `;
+
+export const Waiting = styled.div`
+  top: 0 !important;
+  border-radius: 8px;
+  bottom: 20px;
+  cursor: not-allowed;
+  background: #e8e8e8db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.palette.grey[500] +' !important'};
+  width: 100%;
+`;

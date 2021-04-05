@@ -1,4 +1,4 @@
-import { Styles } from "./styles";
+import { Styles, Waiting } from "./styles";
 import { Flex, Grid } from "../../../UI_Components/Box/styles";
 import { Paragraph, Header5, Span } from "../../../UI_Components/Fonts/styles";
 import { ArrowDownIcon, TransferIcon } from "../../../assest/svg";
@@ -9,13 +9,20 @@ import { generateID } from "../../../../lib/generateID";
 import Alert from "../../../UI_Components/Alert";
 import { theme } from "../../../../config/theme";
 import Bubbles from "../../../UI_Components/Bubbles";
+import Loader from "../../../UI_Components/Loader";
 
 const Transfer = () => {
+  //hold the list of banks
   const [banks, setBanks] = useState([]);
+  //Manageif users account is verified
   const [accountVerified, setAccountVerified] = useState(undefined);
+  //manageloading period
   const [loading, setLoading] = useState(undefined);
+  //manage all alerts
   const [alert, setAlert] = useState([]);
-  // const [typing, setTyping] = useState(undefined);
+  //manage duration immediatly after typing
+  const [waiting, setWaiting] = useState(false);
+  //manage account details
   const [state, setState] = useState({
     accountnumber: "",
     bank: "",
@@ -33,11 +40,7 @@ const Transfer = () => {
     const data = await axios.post(`${url}verify_account`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
-      // account_number: "0690000032",
-      // account_bank: "044",
     });
-
-    console.log(data);
 
     // set a warning if account number or bank nameis wrong
     data.data.status === "error" &&
@@ -53,27 +56,29 @@ const Transfer = () => {
         `Recipient account number: ${data.data.data.account_number}`,
       ]);
 
-    /**
-     *  sets verify state to true, thereby hidding the accbanksount number and bank elect form.
-     * this will display the amount field
-     */
-    return data.data.status === "success" && setAccountVerified(true);
+    // sets verify state to true, thereby hidding the account number field and bank select form. this will display the amount field
+    data.data.status === "success" && setAccountVerified(true);
+
+    return state.bank.length > 0 && setWaiting(false);
   };
 
   // check if user is typing
-  const stopedTyping = () => {
+  const stopTyping = () => {
     window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
     timer = window.setTimeout(() => {
-      // setTyping(false);
-      verify(); //check if account details is verified
+      // call the waiting period
+      state.bank.length > 0 &&
+        state.accountnumber.length > 0 &&
+        setWaiting(true);
+      //check if account details is verified
+      state.bank.length > 0 && state.accountnumber.length > 0 && verify();
     }, timeoutVal);
   };
 
   // check when user stops typing
   const startTyping = () => {
     window.clearTimeout(timer);
-    // setTyping(true);
-    setAlert([]); //ckear all alert
+    setAlert([]); //clear all alert
   };
 
   const transfer = async (e) => {
@@ -85,17 +90,14 @@ const Transfer = () => {
       amount: state.amount,
     });
 
-    // Call the alert component and return a success transsfer if transfer is successful
+    // Call the alert component and return a success transfer if  successful
     data.data.status === "success" &&
       setAlert([`success`, `Transfer successful`]);
 
     // reset loading state if transfer is successfull
     data.data.status === "success" && setLoading(false);
 
-    /**
-     *  sets verify state to false.
-     * this will return the original fields that where visile.
-     */
+    // sets verify state to false. this will return the original fields that where visile.
     data.data.status === "success" && setAccountVerified(false);
 
     // return error message if the transfer was not successful
@@ -103,7 +105,7 @@ const Transfer = () => {
       setAlert([`error`, `${data.data.message}`]) &&
       setLoading(false);
 
-    // reset the form data if transfer is successful
+    // reset  form  if transfer is successful
     return (
       data.data.status === "success" &&
       setState({
@@ -210,7 +212,8 @@ const Transfer = () => {
                         ...prev,
                         bank: e.target.value,
                       }));
-                      verify();
+                      // verify();
+                      stopTyping();
                     }}
                   >
                     <option defaultValue="">Select</option>
@@ -245,9 +248,15 @@ const Transfer = () => {
                         accountnumber: e.target.value.trim(),
                       }));
                     }}
-                    onKeyUp={stopedTyping}
+                    onKeyUp={stopTyping}
                     onKeyPress={startTyping}
                   />
+
+                  {waiting ? (
+                    <Waiting>
+                      <Loader />
+                    </Waiting>
+                  ) : null}
                 </InputStyles>
               </Flex>
             ) : null}
