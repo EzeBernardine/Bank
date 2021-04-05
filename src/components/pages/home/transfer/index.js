@@ -15,11 +15,14 @@ const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(undefined);
   const [loading, setLoading] = useState(undefined);
   const [alert, setAlert] = useState([]);
+  const [typing, setTyping] = useState(undefined);
   const [state, setState] = useState({
     accountnumber: "",
     bank: "",
     amount: "",
   });
+  let timer,
+    timeoutVal = 1000;
 
   const dev = process.env.NODE_ENV === "development";
   const url = dev
@@ -34,9 +37,10 @@ const Transfer = () => {
       // account_bank: "044",
     });
 
+    console.log(data);
+
     // set a warning if account number or bank nameis wrong
     data.data.status === "error" &&
-      state.accountnumber.length > 10 &&
       state.bank.length > 0 &&
       setAlert([`error`, `${data.data.message}`]);
 
@@ -56,6 +60,22 @@ const Transfer = () => {
     return data.data.status === "success" && setAccountVerified(true);
   };
 
+  // check if user is typing
+  const stopedTyping = () => {
+    window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
+    timer = window.setTimeout(() => {
+      setTyping(false);
+      verify(); //check if account details is verified
+    }, timeoutVal);
+  };
+
+  // check when user stops typing
+  const startTyping = () => {
+    window.clearTimeout(timer);
+    setTyping(true);
+    setAlert([]); //ckear all alert
+  };
+
   const transfer = async (e) => {
     e.preventDefault();
 
@@ -64,8 +84,6 @@ const Transfer = () => {
       account_bank: state.bank,
       amount: state.amount,
     });
-    // clear the alert state for a remount
-    setAlert("");
 
     // Call the alert component and return a success transsfer if transfer is successful
     data.data.status === "success" &&
@@ -82,7 +100,7 @@ const Transfer = () => {
 
     // return error message if the transfer was not successful
     data.data.status === "error" &&
-      setAlert([`success`, `${data.data.message}`]) &&
+      setAlert([`error`, `${data.data.message}`]) &&
       setLoading(false);
 
     // reset the form data if transfer is successful
@@ -131,7 +149,7 @@ const Transfer = () => {
             </Paragraph>
           </Bubbles>
 
-          <Flex margin="30px 0 0">
+          <Flex margin="30px 0 -30px">
             <Alert type={"warning"}>
               <Span size="14px">
                 For the meantime, do select{" "}
@@ -227,7 +245,8 @@ const Transfer = () => {
                         accountnumber: e.target.value.trim(),
                       }));
                     }}
-                    onKeyUp={verify}
+                    onKeyUp={stopedTyping}
+                    onKeyPress={startTyping}
                   />
                 </InputStyles>
               </Flex>
