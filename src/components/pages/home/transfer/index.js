@@ -36,30 +36,33 @@ const Transfer = () => {
     ? "http://localhost:3001/"
     : "https://banktest-server-8080.herokuapp.com/";
 
+  const verifiedAccount = (data) => {
+    // Call the alert component and return the details of the account
+    setAlert([
+      `success`,
+      `Account Verified.`,
+      `Recipent name: ${data.data.data.account_name}.`,
+      `Recipient account number: ${data.data.data.account_number}`,
+    ]);
+    // sets verify state to true, thereby hidding the account number field and bank select form. this will display the amount field
+    setAccountVerified(true);
+    return setWaiting(false);
+  };
+
+  const unVerifiedAccount = (data) => {
+    // set a warning if account number or bank nameis wrong
+    setAlert([`error`, `${data.data.message}`]);
+    return setWaiting(false);
+  };
+
   const verify = async () => {
     const data = await axios.post(`${url}verify_account`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
     });
-
-    // set a warning if account number or bank nameis wrong
-    data.data.status === "error" &&
-      state.bank.length > 0 &&
-      setAlert([`error`, `${data.data.message}`]);
-
-    // Call the alert component and return the details of the account
-    data.data.status === "success" &&
-      setAlert([
-        `success`,
-        `Account Verified.`,
-        `Recipent name: ${data.data.data.account_name}.`,
-        `Recipient account number: ${data.data.data.account_number}`,
-      ]);
-
-    // sets verify state to true, thereby hidding the account number field and bank select form. this will display the amount field
-    data.data.status === "success" && setAccountVerified(true);
-
-    return state.bank.length > 0 && setWaiting(false);
+    return data.data.status === "success"
+      ? verifiedAccount(data)
+      : unVerifiedAccount(data);
   };
 
   // check if user is typing
@@ -81,39 +84,36 @@ const Transfer = () => {
     setAlert([]); //clear all alert
   };
 
+  const transferSuccessful = () => {
+    // Call the alert component and return a success transfer if  successful
+    setAlert([`success`, `Transfer successful`]);
+    // sets verify state to false. this will return the original fields that where visile.
+    setAccountVerified(false);
+    // reset loading state if transfer is successfull
+    setLoading(false);
+    return setState({
+      // reset  form  if transfer is successful
+      accountnumber: "",
+      bank: "",
+      amount: "",
+    });
+  };
+
+  const transferUnSuccessful = (data) => {
+    // return error message if the transfer was not successful
+    return setAlert([`error`, `${data.data.message}`]);
+  };
+
   const transfer = async (e) => {
     e.preventDefault();
-
     const data = await axios.post(`${url}make_transfer`, {
       account_number: state.accountnumber,
       account_bank: state.bank,
       amount: state.amount,
     });
-
-    // Call the alert component and return a success transfer if  successful
-    data.data.status === "success" &&
-      setAlert([`success`, `Transfer successful`]);
-
-    // reset loading state if transfer is successfull
-    data.data.status === "success" && setLoading(false);
-
-    // sets verify state to false. this will return the original fields that where visile.
-    data.data.status === "success" && setAccountVerified(false);
-
-    // return error message if the transfer was not successful
-    data.data.status === "error" &&
-      setAlert([`error`, `${data.data.message}`]) &&
-      setLoading(false);
-
-    // reset  form  if transfer is successful
-    return (
-      data.data.status === "success" &&
-      setState({
-        accountnumber: "",
-        bank: "",
-        amount: "",
-      })
-    );
+    return data.data.status === "success"
+      ? transferSuccessful()
+      : transferUnSuccessful(data);
   };
 
   useEffect(() => {
@@ -121,7 +121,6 @@ const Transfer = () => {
       const data = await axios.get(`${url}banks`);
       return setBanks(data.data.data);
     };
-
     getBanks();
   }, [url]);
 
