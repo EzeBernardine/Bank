@@ -36,6 +36,7 @@ const Transfer = () => {
     ? "http://localhost:3001/"
     : "https://banktest-server-8080.herokuapp.com/";
 
+  // handle all verified accounts
   const verifiedAccount = (data) => {
     // Call the alert component and return the details of the account
     setAlert([
@@ -49,12 +50,14 @@ const Transfer = () => {
     return setWaiting(false);
   };
 
+  // handle all unverified accounts
   const unVerifiedAccount = (data) => {
     // set a warning if account number or bank nameis wrong
     setAlert([`error`, `${data.data.message}`]);
     return setWaiting(false);
   };
 
+  // verify if users detail is coorrect
   const verify = async () => {
     const data = await axios.post(`${url}verify_account`, {
       account_number: state.accountnumber,
@@ -85,26 +88,29 @@ const Transfer = () => {
     setAlert([]);
   };
 
+  // handle all successfull transfers
   const transferSuccessful = () => {
-    // Call the alert component and return a success transfer if  successful
+    // Call the alert component and return a success transfer
     setAlert([`success`, `Transfer successful`]);
     // sets verify state to false. this will return the original fields that where visile.
     setAccountVerified(false);
-    // reset loading state if transfer is successfull
+    // reset loading state
     setLoading(false);
     return setState({
-      // reset  form  if transfer is successful
+      // reset  form
       accountnumber: "",
       bank: "",
       amount: "",
     });
   };
 
+  // handle all unsuccessful transfers
   const transferUnSuccessful = (data) => {
     // return error message if the transfer was not successful
     return setAlert([`error`, `${data.data.message}`]);
   };
 
+  // handle transfers
   const transfer = async (e) => {
     e.preventDefault();
     const data = await axios.post(`${url}make_transfer`, {
