@@ -131,24 +131,22 @@ const Transfer = () => {
             </Paragraph>
           </Bubbles>
 
-          {accountVerified === undefined ? (
-            <Flex margin="30px 0 0">
-              <Alert type={"warning"}>
-                <Span size="14px">
-                  For the meantime, do select{" "}
-                  <Span size="14px" weight="600">
-                    access bank
-                  </Span>{" "}
-                  as the reciepient bank, and{" "}
-                  <Span size="14px" weight="600">
-                    0690000032
-                  </Span>{" "}
-                  for account number. We will do well to make it dynamic in our
-                  next release.
-                </Span>
-              </Alert>
-            </Flex>
-          ) : null}
+          <Flex margin="30px 0 0">
+            <Alert type={"warning"}>
+              <Span size="14px">
+                For the meantime, do select{" "}
+                <Span size="14px" weight="600">
+                  access bank
+                </Span>{" "}
+                as the reciepient bank, and{" "}
+                <Span size="14px" weight="600">
+                  0690000032
+                </Span>{" "}
+                for account number. We will do well to make it dynamic in our
+                next release.
+              </Span>
+            </Alert>
+          </Flex>
         </Flex>
 
         {alert.length > 0 ? (
