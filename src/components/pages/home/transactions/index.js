@@ -52,14 +52,15 @@ const Transactions = () => {
               </Flex>
             ),
             created_at: formatDate(created_at) || "-",
-            amount: amount || "-",
+            amount: `${currency}  ${amount || "-"}`,
             account_id: account_id || "-",
             name: customer.name || "-",
           };
 
           let more = {
             more: (
-              <Span colorTheme="primary.default" spacing=".025rem">Payment type: {payment_type}
+              <Span colorTheme="primary.default" spacing=".025rem">
+                Payment type: {payment_type}
                 <br /> Narration: {narration}
                 <br /> Phone number: {customer.phone_number}.
                 <br /> Recipient email: {customer.email}.

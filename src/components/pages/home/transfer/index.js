@@ -14,7 +14,7 @@ import Loader from "../../../UI_Components/Loader";
 const Transfer = () => {
   //hold the list of banks
   const [banks, setBanks] = useState([]);
-  //Manageif users account is verified
+  //Manage if users account is verified
   const [accountVerified, setAccountVerified] = useState(undefined);
   //manageloading period
   const [loading, setLoading] = useState(undefined);
@@ -211,7 +211,6 @@ const Transfer = () => {
                         ...prev,
                         bank: e.target.value,
                       }));
-                      // verify();
                       stopTyping();
                     }}
                   >
