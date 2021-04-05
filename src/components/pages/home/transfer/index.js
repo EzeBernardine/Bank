@@ -15,7 +15,7 @@ const Transfer = () => {
   const [accountVerified, setAccountVerified] = useState(undefined);
   const [loading, setLoading] = useState(undefined);
   const [alert, setAlert] = useState([]);
-  const [typing, setTyping] = useState(undefined);
+  // const [typing, setTyping] = useState(undefined);
   const [state, setState] = useState({
     accountnumber: "",
     bank: "",
@@ -64,7 +64,7 @@ const Transfer = () => {
   const stopedTyping = () => {
     window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
     timer = window.setTimeout(() => {
-      setTyping(false);
+      // setTyping(false);
       verify(); //check if account details is verified
     }, timeoutVal);
   };
@@ -72,7 +72,7 @@ const Transfer = () => {
   // check when user stops typing
   const startTyping = () => {
     window.clearTimeout(timer);
-    setTyping(true);
+    // setTyping(true);
     setAlert([]); //ckear all alert
   };
 
