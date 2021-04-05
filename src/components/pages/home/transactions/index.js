@@ -88,7 +88,7 @@ const Transactions = () => {
         </Flex>
 
         <Paragraph colorTheme="grey[400]" spacing=".025rem" lineHeight="25px">
-          Your recent transactions on this paltform.
+          Your recent transactions on this platform.
         </Paragraph>
       </Flex>
 

@@ -81,7 +81,8 @@ const Transfer = () => {
   // check when user stops typing
   const startTyping = () => {
     window.clearTimeout(timer);
-    setAlert([]); //clear all alert
+    //clear all alert
+    setAlert([]);
   };
 
   const transferSuccessful = () => {
