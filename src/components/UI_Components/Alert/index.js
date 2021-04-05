@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./styles";
+import { Container, Close } from "./styles";
 import { AlertIcon, SuccessIcon } from "../../assest/svg";
 import { useEffect, useState } from "react";
 
@@ -30,6 +30,11 @@ const Alert = ({ type, duration, children }) => {
           ) : (
             <AlertIcon width="15px" height="15px" />
           )}
+
+          {type === "warning" ? (
+            <Close onClick={() => setVisible(false)}>Close</Close>
+          ) : null}
+
           {children}
         </Container>
       ) : null}

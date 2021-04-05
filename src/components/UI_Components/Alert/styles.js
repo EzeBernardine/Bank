@@ -6,7 +6,7 @@ export const Container = styled.div`
   z-index: 10;
   margin-bottom: 30px;
   position: relative;
-  padding: 10px 30px 10px 40px;
+  padding: 20px 30px 10px 40px;
   border-radius: 4px;
   border: ${({ type, theme }) =>
     type === "success"
@@ -34,5 +34,20 @@ export const Container = styled.div`
     position: absolute;
     top: 10px;
     left: 10px;
+  }
+`;
+
+export const Close = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  padding: 0;
+  color: ${({ theme }) => theme.palette.grey[200] || "#fafafa"};
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  :hover {
+    background-color: transparent;
+    color: ${({ theme }) => theme.palette.grey[300] || "#fafafa"};
   }
 `;

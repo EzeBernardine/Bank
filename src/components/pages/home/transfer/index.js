@@ -35,10 +35,10 @@ const Transfer = () => {
     });
 
     // set a warning if account number or bank nameis wrong
-    data.data.name === "Error" &&
+    data.data.status === "error" &&
       state.accountnumber.length > 10 &&
       state.bank.length > 0 &&
-      setAlert([`error`, `Incorrect detail`]);
+      setAlert([`error`, `${data.data.message}`]);
 
     // Call the alert component and return the details of the account
     data.data.status === "success" &&
@@ -79,6 +79,11 @@ const Transfer = () => {
      * this will return the original fields that where visile.
      */
     data.data.status === "success" && setAccountVerified(false);
+
+    // return error message if the transfer was not successful
+    data.data.status === "error" &&
+      setAlert([`success`, `${data.data.message}`]) &&
+      setLoading(false);
 
     // reset the form data if transfer is successful
     return (
@@ -128,7 +133,7 @@ const Transfer = () => {
 
           {accountVerified === undefined ? (
             <Flex margin="30px 0 0">
-              <Alert type={"warning"} duration={10000}>
+              <Alert type={"warning"}>
                 <Span size="14px">
                   For the meantime, do select{" "}
                   <Span size="14px" weight="600">
