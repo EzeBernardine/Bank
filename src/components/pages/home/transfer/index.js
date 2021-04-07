@@ -70,23 +70,18 @@ const Transfer = () => {
 
   // check if user is typing
   const stopTyping = () => {
-    window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
-    timer = window.setTimeout(() => {
-      if (state.bank.length > 0 && state.accountnumber.length === 10) {
-        // call the waiting period
-        setWaiting(true);
-        //check if account details is verified
-        return verify();
-      }
-    }, timeoutVal);
+    if (state.bank.length > 0 && state.accountnumber.length === 10) {
+      // call the waiting period
+      setWaiting(true);
+      //check if account details is verified
+      return verify();
+    } else {
+      setAlert([]); //clear all alert
+    }
   };
 
   // check when user stops typing
-  const startTyping = () => {
-    window.clearTimeout(timer);
-    //clear all alert
-    setAlert([]);
-  };
+  const startTyping = () => setAlert([]); //clear all alert
 
   // handle all successfull transfers
   const transferSuccessful = () => {
