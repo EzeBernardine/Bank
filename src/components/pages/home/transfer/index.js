@@ -72,12 +72,12 @@ const Transfer = () => {
   const stopTyping = () => {
     window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
     timer = window.setTimeout(() => {
-      // call the waiting period
-      state.bank.length > 0 &&
-        state.accountnumber.length > 0 &&
+      if (state.bank.length > 0 && state.accountnumber.length === 10) {
+        // call the waiting period
         setWaiting(true);
-      //check if account details is verified
-      state.bank.length > 0 && state.accountnumber.length > 0 && verify();
+        //check if account details is verified
+        return verify();
+      }
     }, timeoutVal);
   };
 
@@ -250,7 +250,7 @@ const Transfer = () => {
                     onChange={(e) => {
                       setState((prev) => ({
                         ...prev,
-                        accountnumber: e.target.value.trim(),
+                        accountnumber: e.target.value.trim().slice(0, 10),
                       }));
                     }}
                     onKeyUp={stopTyping}
