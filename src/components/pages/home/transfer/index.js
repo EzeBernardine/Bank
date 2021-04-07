@@ -28,8 +28,7 @@ const Transfer = () => {
     bank: "",
     amount: "",
   });
-  let timer,
-    timeoutVal = 1000;
+
 
   const dev = process.env.NODE_ENV === "development";
   const url = dev
