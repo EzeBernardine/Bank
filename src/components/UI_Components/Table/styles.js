@@ -103,6 +103,9 @@ export const TableRowShowMore = styled.tr`
   border: none;
   box-shadow: inset 0 0 7px 8px rgba(105, 57, 33, 0.05);
   background: linear-gradient(#ee6c2e21, #c6927e17);
+  span {
+    padding: 0
+  }
   @media (min-width: 600px) {
     > td {
       padding: 2rem 1.8rem;

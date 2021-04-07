@@ -11,6 +11,9 @@ export const Styles = styled.header`
   left: 0;
   top: 0;
   > div {
+    > h4 {
+      cursor: default;
+    }
     span {
       margin-left: 15px;
     }
@@ -18,6 +21,7 @@ export const Styles = styled.header`
     .welcomeNote {
       border-right: 1px solid #e1d9d4;
       padding-right: 10px;
+      cursor: default;
     }
     .avatar {
       cursor: pointer;

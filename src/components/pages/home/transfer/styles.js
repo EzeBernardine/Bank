@@ -25,10 +25,12 @@ export const Styles = styled.div`
         @media (max-width: 950px) {
           flex-direction: column;
           align-items: stretch;
+          label {
+            margin-bottom: 10px;
+          }
           input,
           select {
             max-width: 100%;
-            margin-top: 10px;
           }
         }
       }
@@ -60,6 +62,6 @@ export const Waiting = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({ theme }) => theme.palette.grey[500] +' !important'};
+  color: ${({ theme }) => theme.palette.grey[500] + " !important"};
   width: 100%;
 `;
