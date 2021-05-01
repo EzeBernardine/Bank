@@ -14,12 +14,31 @@ const Transactions = () => {
     transaction: [],
     moreTransactions: [],
   });
+
+  const tableState = ({ status }) => {
+    return (
+      <Flex
+        width="max-content"
+        style={{
+          backgroundColor: `${
+            status === "successful"
+              ? theme.palette.success.main
+              : theme.palette.error.main
+          }`,
+          borderRadius: "4px",
+        }}
+      >
+        <Span colorTheme="white">{status || "-"} </Span>
+      </Flex>
+    );
+  };
+
   useEffect(() => {
     const transactions = async () => {
       const data = await axios.get(`${url}transactions`);
 
-      let transactionsCopy = [...transactionsData.transaction];
-      let moreTransactionsCopy = [...transactionsData.moreTransactions];
+      let transactionsCopy = [];
+      let moreTransactionsCopy = [];
 
       data.data.data.map(
         ({
@@ -33,21 +52,7 @@ const Transactions = () => {
           payment_type,
         }) => {
           let data = {
-            status: (
-              <Flex
-                width="max-content"
-                style={{
-                  backgroundColor: `${
-                    status === "successful"
-                      ? theme.palette.success.main
-                      : theme.palette.error.main
-                  }`,
-                  borderRadius: "4px",
-                }}
-              >
-                <Span colorTheme="white">{status || "-"} </Span>
-              </Flex>
-            ),
+            status: tableState(status),
             created_at: formatDate(created_at) || "-",
             amount: `${currency}  ${amount || "-"}`,
             account_id: account_id || "-",
