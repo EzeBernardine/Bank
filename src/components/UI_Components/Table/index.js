@@ -15,7 +15,7 @@ import { OverFlowScrollBar } from "../OverflowScroll/styles";
 import Pagination from "../Paginator";
 import { Span } from "../Fonts/styles";
 
-const CustomTable = ({
+const CustomTable =   ({
   tableBody,
   tableHead,
   rowHovColor,

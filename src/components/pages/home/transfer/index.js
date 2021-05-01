@@ -10,6 +10,7 @@ import Alert from "../../../UI_Components/Alert";
 import { theme } from "../../../../config/theme";
 import Bubbles from "../../../UI_Components/Bubbles";
 import Loader from "../../../UI_Components/Loader";
+import url from "../../../../config/baseURL";
 
 const Transfer = () => {
   //hold the list of banks
@@ -28,12 +29,6 @@ const Transfer = () => {
     bank: "",
     amount: "",
   });
-
-
-  const dev = process.env.NODE_ENV === "development";
-  const url = dev
-    ? "http://localhost:3001/"
-    : "https://banktest-server-8080.herokuapp.com/";
 
   // handle all verified accounts
   const verifiedAccount = (data) => {
@@ -120,7 +115,20 @@ const Transfer = () => {
   useEffect(() => {
     const getBanks = async () => {
       const data = await axios.get(`${url}banks`);
-      return setBanks(data.data.data);
+      let banksrray = data.data.data;
+
+      banksrray.sort(function (a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+      });
+
+      return setBanks(banksrray);
     };
     getBanks();
   }, [url]);

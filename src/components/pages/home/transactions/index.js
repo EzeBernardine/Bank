@@ -7,16 +7,13 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../../../../lib/factory.lib";
 import Loader from "../../../UI_Components/Loader";
 import { theme } from "../../../../config/theme";
+import url from "../../../../config/baseURL";
 
 const Transactions = () => {
   const [transactionsData, setTransactions] = useState([]);
   const [moreDetail, setMoreDetails] = useState([]);
 
   useEffect(() => {
-    const dev = process.env.NODE_ENV === "development";
-    const url = dev
-      ? "http://localhost:3001/"
-      : "https://banktest-server-8080.herokuapp.com/";
 
     const transactions = async () => {
       const data = await axios.get(`${url}transactions`);
