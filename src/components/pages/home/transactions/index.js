@@ -10,16 +10,16 @@ import { theme } from "../../../../config/theme";
 import url from "../../../../config/baseURL";
 
 const Transactions = () => {
-  const [transactionsData, setTransactions] = useState([]);
-  const [moreDetail, setMoreDetails] = useState([]);
-
+  const [transactionsData, setTransactions] = useState({
+    transaction: [],
+    moreTransactions: [],
+  });
   useEffect(() => {
-
     const transactions = async () => {
       const data = await axios.get(`${url}transactions`);
 
-      let arr = [];
-      let emptyMore = [];
+      let transactionsCopy = [...transactionsData.transaction];
+      let moreTransactionsCopy = [...transactionsData.moreTransactions];
 
       data.data.data.map(
         ({
@@ -64,12 +64,15 @@ const Transactions = () => {
               </Span>
             ),
           };
-          arr.push(data);
-          return emptyMore.push(more);
+          transactionsCopy.push(data);
+          return moreTransactionsCopy.push(more);
         }
       );
-      setMoreDetails(emptyMore);
-      return setTransactions(arr);
+
+      return setTransactions({
+        transaction: transactionsCopy,
+        moreTransactions: moreTransactionsCopy,
+      });
     };
     transactions();
   }, []);
@@ -89,12 +92,13 @@ const Transactions = () => {
         </Paragraph>
       </Flex>
 
-      {transactionsData.length > 0 && moreDetail.length > 0 ? (
+      {transactionsData.transaction.length > 0 &&
+      transactionsData.moreTransactions.length > 0 ? (
         <CustomTable
           gap="0px"
           tableHead={tableHead}
-          tableBody={transactionsData}
-          moreDetail={moreDetail}
+          tableBody={transactionsData.transaction}
+          moreDetail={transactionsData.moreTransactions}
           rowHovColor="#d2ccc626"
           rowClick={(data) => console.log(data)}
           handleReadAll={() => []}
