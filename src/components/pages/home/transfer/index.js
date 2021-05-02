@@ -126,8 +126,9 @@ const Transfer = () => {
         if (nameA > nameB) {
           return 1;
         }
-        return setBanks(banksrray);
+        return 1;
       });
+      return setBanks(banksrray);
     };
     getBanks();
   }, []);

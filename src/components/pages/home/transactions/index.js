@@ -59,16 +59,14 @@ const Transactions = () => {
             name: customer.name || "-",
           };
 
-          let more = {
-            more: (
-              <Span colorTheme="primary.default" spacing=".025rem">
-                Payment type: {payment_type}
-                <br /> Narration: {narration}
-                <br /> Phone number: {customer.phone_number}.
-                <br /> Recipient email: {customer.email}.
-              </Span>
-            ),
-          };
+          let more = (
+            <Span colorTheme="primary.default" spacing=".025rem">
+              Payment type: {payment_type}
+              <br /> Narration: {narration}
+              <br /> Phone number: {customer.phone_number}.
+              <br /> Recipient email: {customer.email}.
+            </Span>
+          );
 
           return [moreTransactionsCopy.push(more), transactionsCopy.push(data)];
         }
