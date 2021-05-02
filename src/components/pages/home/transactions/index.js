@@ -15,7 +15,7 @@ const Transactions = () => {
     moreTransactions: [],
   });
 
-  const tableState = ({ status }) => {
+  const setTableStatus = (status) => {
     return (
       <Flex
         width="max-content"
@@ -52,7 +52,7 @@ const Transactions = () => {
           payment_type,
         }) => {
           let data = {
-            status: tableState(status),
+            status: setTableStatus(status),
             created_at: formatDate(created_at) || "-",
             amount: `${currency}  ${amount || "-"}`,
             account_id: account_id || "-",
@@ -69,8 +69,8 @@ const Transactions = () => {
               </Span>
             ),
           };
-          transactionsCopy.push(data);
-          return moreTransactionsCopy.push(more);
+
+          return [moreTransactionsCopy.push(more), transactionsCopy.push(data)];
         }
       );
 

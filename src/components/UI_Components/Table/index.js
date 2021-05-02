@@ -15,7 +15,7 @@ import { OverFlowScrollBar } from "../OverflowScroll/styles";
 import Pagination from "../Paginator";
 import { Span } from "../Fonts/styles";
 
-const CustomTable =   ({
+const CustomTable = ({
   tableBody,
   tableHead,
   rowHovColor,
@@ -52,17 +52,15 @@ const CustomTable =   ({
             </TableBodyData>
           ))}
         </TableRow>
-        <TableRowShowMore
-          style={{
-            display: `${isOpen === index ? "table-row" : "none"}`,
-          }}
-        >
-          <TableBodyData colSpan="5">
-            <Span colorTheme="primary.default" spacing=".025rem">
-              {moreDetail[idx].more.props.children}
-            </Span>
-          </TableBodyData>
-        </TableRowShowMore>
+        {isOpen === index ? (
+          <TableRowShowMore>
+            <TableBodyData colSpan="5">
+              <Span colorTheme="primary.default" spacing=".025rem">
+                {moreDetail[idx]}
+              </Span>
+            </TableBodyData>
+          </TableRowShowMore>
+        ) : null}
       </React.Fragment>
     );
   };

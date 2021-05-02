@@ -117,7 +117,7 @@ const Transfer = () => {
       const data = await axios.get(`${url}banks`);
       let banksrray = data.data.data;
 
-      banksrray.sort(function (a, b) {
+      banksrray.sort((a, b) => {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
         var nameB = b.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
@@ -126,12 +126,11 @@ const Transfer = () => {
         if (nameA > nameB) {
           return 1;
         }
+        return setBanks(banksrray);
       });
-
-      return setBanks(banksrray);
     };
     getBanks();
-  }, [url]);
+  }, []);
 
   return (
     <Styles>
